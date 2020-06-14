@@ -21,12 +21,11 @@ set listchars=tab:\>\ ,trail:.,extends:>,precedes:<
 set novisualbell
 set ruler
 set number
+set laststatus=2
 
 if has("gui_running")
   set guifont=Terminus
   colorscheme desert
-else
-  set nonumber
 endif
 
 " Search options
