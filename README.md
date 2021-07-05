@@ -25,5 +25,16 @@ cp Single_line_Minimalist_Ascii.bgptheme ~/.bash-git-prompt/themes/
 * other packages
 
 ```
-sudo apt install ripgrep
+packages=(
+  clag
+  clang-11
+  clang-format-11
+  make
+  ncdu
+  ripgrep
+  tmux
+  vim-nox
+  virtualenv
+)
+sudo apt install "${packages[@]}"
 ```

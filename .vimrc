@@ -26,6 +26,8 @@ set laststatus=2
 if has("gui_running")
   set guifont=Terminus
   colorscheme desert
+else
+  colorscheme industry
 endif
 
 " Search options
