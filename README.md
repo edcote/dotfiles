@@ -26,15 +26,38 @@ cp Single_line_Minimalist_Ascii.bgptheme ~/.bash-git-prompt/themes/
 
 ```
 packages=(
-  clag
+  apt-transport-https
   clang-11
   clang-format-11
+  curl
+  gnupg
   make
   ncdu
+  pylint
+  python3-pip
   ripgrep
+  shellcheck
   tmux
   vim-nox
   virtualenv
+  yapf
 )
 sudo apt install "${packages[@]}"
 ```
+
+* pyformat
+
+`pip install pyformat`
+
+* bazel
+
+```
+curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > bazel.gpg
+sudo mv bazel.gpg /etc/apt/trusted.gpg.d/
+echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+sudo apt update && sudo apt install bazel
+```
+
+* octave
+
+`snap install octave`

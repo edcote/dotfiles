@@ -104,9 +104,9 @@ fi
 export PROMPT_DIRTRIM=4
 
 # enable bash-git-prompt
-GIT_PROMPT_ONLY_IN_REPO=1
-GIT_PROMPT_THEME=Single_line_Minimalist_Ascii
-GIT_PROMPT_SHOW_UNTRACKED_FILES=no
+export GIT_PROMPT_ONLY_IN_REPO=1
+export GIT_PROMPT_THEME=Single_line_Minimalist_Ascii
+export GIT_PROMPT_SHOW_UNTRACKED_FILES=no
 source ~/.bash-git-prompt/gitprompt.sh
 
 # Aliases
@@ -163,3 +163,4 @@ alias dirs='dirs -v'
 export EDITOR=vim
 export VISUAL=vim
 
+export PATH=$PATH:$HOME/.local/bin
