@@ -147,8 +147,8 @@ alias gc='git commit'
 alias gd='git diff'
 alias gl='git log'
 alias gs='git status'
-alias gp='git stash push'
-alias go='git stash pop'
+alias sp='git stash push'
+alias so='git stash pop'
 
 alias t='tmux attach || tmux new-session'
 alias ta='tmux attach -t'
@@ -163,4 +163,4 @@ alias dirs='dirs -v'
 export EDITOR=vim
 export VISUAL=vim
 
-export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/go/bin
