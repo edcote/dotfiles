@@ -22,6 +22,7 @@ set novisualbell
 set ruler
 set number
 set laststatus=2
+set nowrap
 
 colorscheme ron
 
