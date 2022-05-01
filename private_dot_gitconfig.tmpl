@@ -1,0 +1,34 @@
+{{ if eq .chezmoi.osRelease.versionID "rodete" }}
+[http]
+	cookiefile = /usr/local/google/home/ecote/.gitcookies
+{{ end }}
+[user]
+	name = Edmond Cote
+{{ if eq .chezmoi.osRelease.versionID "rodete" }}
+	email = ecote@google.com
+{{ else }}
+	email = edmond.cote@gmail.com
+{{ end }}
+[color]
+	ui = auto
+[core]
+	editor = vim
+[repo]
+	superprojectChoiceExpire = 1632767310
+	superprojectChoice = false
+[pull]
+	rebase = true
+[diff]
+	tool = vimdiff
+[difftool "vimdiff"]
+	cmd = vimdiff
+	path = /usr/bin/vimdiff
+[difftool]
+	prompt = false
+[merge]
+	tool = vimdiff
+[mergetool "vimdiff"]
+	path = /usr/bin/vimdiff
+[mergetool]
+	prompt = false
+

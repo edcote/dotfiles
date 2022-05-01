@@ -1,0 +1,18 @@
+{{ if eq .chezmoi.osRelease.versionID "rodete" }}
+Sunglass() {
+  local number=${1-:1}
+  local branch=${2-:rdo}
+  local gitroot="${HOME}/gitrepos/sunglass${branch}_$number"
+
+  pushd "${gitroot}/software" >& /dev/null
+  pushd "${gitroot}/hardware/src/include" >& /dev/null
+  pushd "${gitroot}/hardware/tb" >& /dev/null
+  pushd "${gitroot}/hardware/traces" >& /dev/null
+  pushd "${gitroot}/hardware/test/unit/isp_tracer" >& /dev/null
+  pushd "${gitroot}/hardware/scripts/rtl_gen" >& /dev/null
+  pushd "${gitroot}" >& /dev/null
+
+  dirs -v
+}
+export -f Sunglass
+{{ end }}
