@@ -1,10 +1,11 @@
-{{ if eq .chezmoi.osRelease.versionID "rodete" }}
+{{ if (contains "google" .chezmoi.homeDir) }}
 [http]
 	cookiefile = /usr/local/google/home/ecote/.gitcookies
 {{ end }}
+
 [user]
 	name = Edmond Cote
-{{ if eq .chezmoi.osRelease.versionID "rodete" }}
+{{ if (contains "google" .chezmoi.homeDir) }}
 	email = ecote@google.com
 {{ else }}
 	email = edmond.cote@gmail.com
