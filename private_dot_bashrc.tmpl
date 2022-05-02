@@ -51,19 +51,28 @@ export HISTFILESIZE=20000
 # Prompt Options
 #################
 
-# set a fancy prompt (non-color, unless we know we "want" color)
+# override terminal type set by tmux
 case "${TERM}" in
-  xterm-color|*-256color) color_prompt="yes";;
+  xterm*)
+    export TERM="xterm-256color"
+    ;;
 esac
 
-if [[ ${color_prompt} == "yes" ]]; then
+# enable color terminal
+case "${TERM}" in
+  *color)
+    color_prompt="yes"
+    ;;
+esac
+
+if [[ "${color_prompt}" == "yes" ]]; then
   PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
+
 unset color_prompt
 
-# enable color support of ls and also add handy aliases
 alias ls='ls --color=auto'
 eval "$(cat "${HOME}/.dircolors")"
 

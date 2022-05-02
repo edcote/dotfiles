@@ -35,18 +35,10 @@ set ignorecase
 set hlsearch
 set incsearch
 
-" Terminal options
-set term=xterm-256color
-
 " Buffer options
 noremap <C-d> :bdelete<CR>
 noremap <C-n> :bnext<CR>
 noremap <C-p> :bprev<CR>
-
-noremap <A-Up> :wincmd k<CR>
-noremap <A-Down> :wincmd j<CR>
-noremap <A-Left> :wincmd h<CR>
-noremap <A-Right> :wincmd l<CR>
 
 " Save files when window loses focus
 autocmd FocusLost * silent! wa
