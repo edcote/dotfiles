@@ -2,7 +2,7 @@
 Sunglass() {
   local number=${1-:1}
   local branch=${2-:rdo}
-  local gitroot="${HOME}/gitrepos/sunglass${branch}_$number"
+  local gitroot="${HOME}/gitrepos/sunglass${branch}_${number}"
 
   pushd "${gitroot}/software" >& /dev/null
   pushd "${gitroot}/hardware/src/include" >& /dev/null
@@ -11,8 +11,21 @@ Sunglass() {
   pushd "${gitroot}/hardware/test/unit/isp_tracer" >& /dev/null
   pushd "${gitroot}/hardware/scripts/rtl_gen" >& /dev/null
   pushd "${gitroot}" >& /dev/null
-
+  pushd "${gitroot}" >& /dev/null
+  cd "${gitroot}"
   dirs -v
 }
 export -f Sunglass
+
+function gcert() {
+  [[ -n "${TMUX:-}" ]] && eval $(tmux show-environment -s)
+  command gcert "$@"
+}
+export -f gcert
+
+function gcertstatus() {
+  [[ -n "${TMUX:-}" ]] && eval $(tmux show-environment -s)
+  command gcertstatus "$@"
+}
+export -f gcertstatus
 {{ end }}
