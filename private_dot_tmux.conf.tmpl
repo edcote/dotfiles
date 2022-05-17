@@ -17,10 +17,16 @@ set -g history-limit 100000
 # Enable 256 colors
 set -g default-terminal "screen-256color"
 
-{{ if (contains "whi" .chezmoi.hostname) }}
+{{ if (contains "whi-us" .chezmoi.hostname) }}
 set -g status-bg blue
-set -g status-fg default
+{{ else if (contains "whi-asia" .chezmoi.hostname) }}
+set -g status-bg orange
+{{ else if (contains "arthur" .chezmoi.hostname) }}
+set -g status-bg green
+{{ else }}
+set -g status-bg purgple
 {{ end }}
+set -g status-fg default
 
 # Shortcut to navigate panes, client, and windows
 bind -n C-S-Left select-pane -L
