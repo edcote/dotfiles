@@ -150,7 +150,7 @@ function p() {
 export -f p
 
 # Removes directory from stack and print.
-alias o='popd && dirs -v'
+alias o='popd -n && dirs -v'
 
 # Displays directory stack.
 alias dirs='dirs -v'
