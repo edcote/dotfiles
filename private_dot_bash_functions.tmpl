@@ -18,13 +18,13 @@ Sunglass() {
 export -f Sunglass
 
 function gcert() {
-  [[ -n "${TMUX:-}" ]] && eval $(tmux show-environment -s)
+  [[ -n "${TMUX:-}" ]] && eval $(tmx2 show-environment -s)
   command gcert "$@"
 }
 export -f gcert
 
 function gcertstatus() {
-  [[ -n "${TMUX:-}" ]] && eval $(tmux show-environment -s)
+  [[ -n "${TMUX:-}" ]] && eval $(tmx2 show-environment -s)
   command gcertstatus "$@"
 }
 export -f gcertstatus
