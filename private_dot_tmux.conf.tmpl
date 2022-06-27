@@ -6,11 +6,13 @@ unbind %
 
 # Shortcut to reload config file
 bind r source-file ~/.tmux.conf
+# Shortcut to toggle xterm-keys
+bind x set-option -g xterm-keys \; display "xterm-keys: #{?xterm-keys,ON,OFF}"
 
 # Start window numbers at 1 and no automatic renaming
 set -g base-index 1
 set -g allow-rename off
-set -g status-left-length 100
+set -g status-left-length 200
 
 # Keep extra-large history log
 set -g history-limit 100000
