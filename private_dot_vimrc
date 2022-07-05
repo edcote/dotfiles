@@ -27,7 +27,7 @@ set nowrap
 colorscheme ron
 
 if has("gui_running")
-  set guifont=Terminus\ Medium\ 11
+  set guifont=Terminus\ Medium\ 9
 endif
 
 " Search options
