@@ -6,6 +6,14 @@ execute pathogen#infect()
 " Syntax highlighting
 syntax on
 filetype plugin indent off
+" https://github.com/sonph/onehalf/tree/master/vim
+colorscheme onehalfdark
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set t_Co=256
+  set termguicolors
+endif
 
 " Whitespace
 set shiftwidth=2
@@ -18,13 +26,13 @@ set list
 set listchars=tab:\>\ ,trail:.,extends:>,precedes:<
 
 " Interface
+set cursorline
 set novisualbell
 set ruler
 set number
 set laststatus=2
 set nowrap
 
-colorscheme ron
 
 if has("gui_running")
   set guifont=Terminus\ Medium\ 9

@@ -19,6 +19,7 @@ set -g history-limit 100000
 
 # Enable 256 colors
 set -g default-terminal "screen-256color"
+set -ga terminal-overrides ",*256col*:Tc"
 
 {{ if (contains "whi-us" .chezmoi.hostname) }}
 set -g status-bg blue

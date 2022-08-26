@@ -10,3 +10,7 @@ To import: `dconf load / < dconf-settings.ini`
 go install github.com/bazelbuild/bazelisk@latest
 go install github.com/bazelbuild/buildtools/buildifier@latest
 ```
+
+## Themes
+
+- https://github.com/sonph/onehalf
