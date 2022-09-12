@@ -45,7 +45,8 @@ g4cleansync() {
   fi
   g4 status
   if confirm; then
-    g4 revert //...; g4 sync
+    g4 revert //...
+    g4 sync
     clear
   fi
 }
@@ -75,7 +76,7 @@ gitcleansync() {
   git status
   if confirm; then
     git clean -fdx
-    git push --rebase
+    git pull --rebase
     git submodule update --init --recursive
     clear
   fi
