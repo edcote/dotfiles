@@ -1,3 +1,12 @@
+confirm() {
+  read -r -p "${1:-Are you sure? [y/N]} " response
+  case "$response" in
+    [yY][eE][sS]|[yY]) true ;;
+    *) false ;;
+  esac
+}
+export -f confirm
+
 {{ if eq .chezmoi.osRelease.versionID "rodete" }}
 Sunglass() {
   local number=${1-:1}
@@ -17,15 +26,59 @@ Sunglass() {
 }
 export -f Sunglass
 
-function gcert() {
+gcert() {
   [[ -n "${TMUX:-}" ]] && eval $(tmx2 show-environment -s)
   command gcert "$@"
 }
 export -f gcert
 
-function gcertstatus() {
+gcertstatus() {
   [[ -n "${TMUX:-}" ]] && eval $(tmx2 show-environment -s)
   command gcertstatus "$@"
 }
 export -f gcertstatus
+
+g4cleansync() {
+  if ! [[ -d ${PWD%/google3*}/.citc ]]; then
+    echo "ERROR: Not in g3 client" >&2
+    return 1
+  fi
+  g4 status
+  if confirm; then
+    g4 revert //...; g4 sync
+    clear
+  fi
+}
+export -f g4cleansync
+
+hgcleansync() {
+  if ! grep -s -q fig ${PWD%/google3*}/.hg/requires; then
+    echo "ERROR: Not in fig client" >&2
+    return 1
+  fi
+  hg status
+  if confirm; then
+    hg revert --all
+    hg sync
+    clear
+  fi
+}
+export -f hgcleansync
+
 {{ end }}
+
+gitcleansync() {
+  if ! [[ -d .git ]]; then
+    echo "ERROR: Not in git root directory" >&2
+    return 1
+  fi
+  git status
+  if confirm; then
+    git clean -fdx
+    git push --rebase
+    git submodule update --init --recursive
+    clear
+  fi
+}
+export -f gitcleansync
+

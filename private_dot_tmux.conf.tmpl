@@ -26,9 +26,13 @@ set -g status-bg blue
 {{ else if (contains "whi-asia" .chezmoi.hostname) }}
 set -g status-bg red
 {{ else if (contains "arthur" .chezmoi.hostname) }}
-set -g status-bg green
+set -g status-bg teal
+{{ else if (contains "wilfrid" .chezmoi.hostname) }}
+set -g status-bg lime
+{{ else if (contains "nana" .chezmoi.hostname) }}
+set -g status-bg HotPink
 {{ else }}
-set -g status-bg magenta
+set -g status-bg fuchsia
 {{ end }}
 set -g status-fg default
 
