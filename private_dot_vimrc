@@ -35,7 +35,7 @@ set nowrap
 
 
 if has("gui_running")
-  set guifont=Terminus\ Medium\ 9
+  set guifont=Terminus\ Medium\ 11
 endif
 
 " Search options
