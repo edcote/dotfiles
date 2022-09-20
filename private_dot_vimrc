@@ -25,6 +25,16 @@ set nosmartindent
 set list
 set listchars=tab:\>\ ,trail:.,extends:>,precedes:<
 
+function TrimWhiteSpace()
+  %s/\s*$//
+  ''
+endfunction
+
+autocmd FileWritePre * call TrimWhiteSpace()
+autocmd FileAppendPre * call TrimWhiteSpace()
+autocmd FilterWritePre * call TrimWhiteSpace()
+autocmd BufWritePre * call TrimWhiteSpace()
+
 " Interface
 set cursorline
 set novisualbell
@@ -32,7 +42,6 @@ set ruler
 set number
 set laststatus=2
 set nowrap
-
 
 if has("gui_running")
   set guifont=Terminus\ Medium\ 11
