@@ -173,8 +173,7 @@ export PATH="${PATH}:${HOME}/bin:${HOME}/go/bin"
 {{ if (contains "google" .chezmoi.homeDir) }}
 export PATH="${PATH}:${HOME}/hls_infra_tools/common/tools"
 {{ if eq .chezmoi.osRelease.versionID "rodete" }}
-gcertstatus --nocheck_ssh &>/dev/null || (echo "WARNING: LOAS2 certificate expired" && gcert)
-source /google/bin/releases/knock/autoknock.sh
+gcertstatus --nocheck_ssh &>/dev/null || (echo "WARNING: LOAS2 certificate expired")
 export P4DIFF=diff
 {{ end }}
 {{ end }}
