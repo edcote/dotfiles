@@ -83,3 +83,14 @@ gitcleansync() {
 }
 export -f gitcleansync
 
+bgrm() {
+  if confirm; then
+    local tmp=$(mktemp)
+    mv $* ${tmp}
+    \rm -rf $*
+    \rm -rf ${tmp}
+  fi
+}
+
+export -f bgrm
+
