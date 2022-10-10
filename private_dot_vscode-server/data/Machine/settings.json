@@ -1,0 +1,9 @@
+{
+    "bazel.executable": "/home/edc/go/bin/bazelisk",
+    "bazel.buildifierExecutable": "/home/edc/go/bin/buildifier",
+    "bazel.buildifierFixOnFormat": true,
+
+    "files.autoSave": "onFocusChange",
+
+    "terminal.integrated.allowChords": false,
+}
