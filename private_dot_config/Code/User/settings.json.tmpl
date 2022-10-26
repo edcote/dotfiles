@@ -1,0 +1,44 @@
+{
+{{ if eq .chezmoi.osRelease.versionID "rodete" }}
+    "bazel.executable": "/usr/bin/bazel",
+    "bazel.buildifierExecutable": "/usr/bin/buildifier",
+    "bazel.buildifierFixOnFormat": true,
+{{ else if (contains "google" .chezmoi.homeDir) }}
+    "bazel.executable": "/usr/local/google/home/ecote/go/bin/bazelisk",
+    "bazel.buildifierExecutable": "/usr/local/google/home/ecote/go/bin/buildifier",
+    "bazel.buildifierFixOnFormat": true,
+{{ else }}
+    "bazel.executable": "/home/edc/go/bin/bazelisk",
+    "bazel.buildifierExecutable": "/home/edc/go/bin/buildifier",
+    "bazel.buildifierFixOnFormat": true,
+{{ end }}
+
+    "files.autoSave": "onFocusChange",
+
+    "terminal.integrated.allowChords": false,
+
+    "vim.autoindent": false,
+    "vim.cursorStylePerMode.insert": "line",
+    "vim.cursorStylePerMode.visualblock": "block",
+    "vim.hlsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.statusBarColorControl": true,
+    "vim.mouseSelectionGoesIntoVisualMode": false,
+    "vim.cursorStylePerMode.normal": "block",
+    "vim.cursorStylePerMode.visual": "block",
+    "vim.cursorStylePerMode.replace": "block-outline",
+    "vim.highlightedyank.enable": true,
+
+    "editor.minimap.enabled": false,
+    "editor.tabSize": 2,
+    "editor.useTabStops": false,
+
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "workbench.enableExperiments": false,
+    "telemetry.telemetryLevel": "off",
+    "extensions.ignoreRecommendations": true,
+    "extensions.autoUpdate": false,
+}
