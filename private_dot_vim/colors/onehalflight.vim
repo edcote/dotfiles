@@ -17,7 +17,7 @@ let g:colors_name="onehalflight"
 let colors_name="onehalflight"
 
 
-let s:black       = { "gui": "#383a42", "cterm": "237" }
+let s:black       = { "gui": "#000000", "cterm": "0" }
 let s:red         = { "gui": "#e45649", "cterm": "167" }
 let s:green       = { "gui": "#50a14f", "cterm": "71" }
 let s:yellow      = { "gui": "#c18401", "cterm": "136" }
@@ -165,60 +165,3 @@ call s:h("Error", s:red, s:gutter_bg, "")
 call s:h("Todo", s:purple, "", "")
 " }
 
-
-" Plugins {
-" GitGutter
-call s:h("GitGutterAdd", s:green, s:gutter_bg, "")
-call s:h("GitGutterDelete", s:red, s:gutter_bg, "")
-call s:h("GitGutterChange", s:yellow, s:gutter_bg, "")
-call s:h("GitGutterChangeDelete", s:red, s:gutter_bg, "")
-" Fugitive
-call s:h("diffAdded", s:green, "", "")
-call s:h("diffRemoved", s:red, "", "")
-" }
-
-
-" Git {
-call s:h("gitcommitComment", s:comment_fg, "", "")
-call s:h("gitcommitUnmerged", s:red, "", "")
-call s:h("gitcommitOnBranch", s:fg, "", "")
-call s:h("gitcommitBranch", s:purple, "", "")
-call s:h("gitcommitDiscardedType", s:red, "", "")
-call s:h("gitcommitSelectedType", s:green, "", "")
-call s:h("gitcommitHeader", s:fg, "", "")
-call s:h("gitcommitUntrackedFile", s:cyan, "", "")
-call s:h("gitcommitDiscardedFile", s:red, "", "")
-call s:h("gitcommitSelectedFile", s:green, "", "")
-call s:h("gitcommitUnmergedFile", s:yellow, "", "")
-call s:h("gitcommitFile", s:fg, "", "")
-hi link gitcommitNoBranch gitcommitBranch
-hi link gitcommitUntracked gitcommitComment
-hi link gitcommitDiscarded gitcommitComment
-hi link gitcommitSelected gitcommitComment
-hi link gitcommitDiscardedArrow gitcommitDiscardedFile
-hi link gitcommitSelectedArrow gitcommitSelectedFile
-hi link gitcommitUnmergedArrow gitcommitUnmergedFile
-" }
-
-" Fix colors in neovim terminal buffers {
-  if has('nvim')
-    let g:terminal_color_0 = s:black.gui
-    let g:terminal_color_1 = s:red.gui
-    let g:terminal_color_2 = s:green.gui
-    let g:terminal_color_3 = s:yellow.gui
-    let g:terminal_color_4 = s:blue.gui
-    let g:terminal_color_5 = s:purple.gui
-    let g:terminal_color_6 = s:cyan.gui
-    let g:terminal_color_7 = s:white.gui
-    let g:terminal_color_8 = s:black.gui
-    let g:terminal_color_9 = s:red.gui
-    let g:terminal_color_10 = s:green.gui
-    let g:terminal_color_11 = s:yellow.gui
-    let g:terminal_color_12 = s:blue.gui
-    let g:terminal_color_13 = s:purple.gui
-    let g:terminal_color_14 = s:cyan.gui
-    let g:terminal_color_15 = s:white.gui
-    let g:terminal_color_background = s:bg.gui
-    let g:terminal_color_foreground = s:fg.gui
-  endif
-" }
