@@ -26,3 +26,29 @@ go install github.com/bazelbuild/buildtools/buildifier@latest
 ## Themes
 
 - https://github.com/sonph/onehalf
+
+## Visual Studio Code Server
+
+Use [SSH port forwarding](https://github.com/coder/code-server/blob/main/docs/guide.md) to access.
+
+`sudo systemctl restart code-server@$USER`
+
+/home/edc/.config/code-server/config.yaml
+
+/home/edc/.local/share/code-server/User/settings.json
+/home/edc/.local/share/code-server/User/keybindings.json
+
+Location of settings files:
+
+- Workspaces
+
+`.vscode/settings.json`
+
+- VS Code Remote Development
+
+`${HOME}/.vscode-server/data/Machine/settings.json`
+
+Try using symlinks~
+
+$HOME/.config/Code/User/settings.json
+%APPDATA%\Roaming\Code\User\settings.json
