@@ -1,3 +1,5 @@
+# My dotfiles README
+
 ## GNOME
 
 To export: `dconf dump / > dconf_gnome.ini`
@@ -25,30 +27,26 @@ go install github.com/bazelbuild/buildtools/buildifier@latest
 
 ## Themes
 
-- https://github.com/sonph/onehalf
+-   https://github.com/sonph/onehalf
 
-## Visual Studio Code Server
+## Visual Studio Code
 
-Use [SSH port forwarding](https://github.com/coder/code-server/blob/main/docs/guide.md) to access.
+### Location of settings files
 
-`sudo systemctl restart code-server@$USER`
+-   VS Code
 
-/home/edc/.config/code-server/config.yaml
+    -   `${HOME}/.config/Code/User/settings.json`
+    -   `%APPDATA%\Roaming\Code\User\settings.json` (Windows)
 
-/home/edc/.local/share/code-server/User/settings.json
-/home/edc/.local/share/code-server/User/keybindings.json
+-   Visual Studio Code Server
 
-Location of settings files:
+    -   `${HOME}/.local/share/code-server/User/settings.json
+    -   `${HOME}/.local/share/code-server/User/keybindings.json
 
-- Workspaces
+Use
+[SSH port forwarding](https://github.com/coder/code-server/blob/main/docs/guide.md)
+to access.
 
-`.vscode/settings.json`
+-   VS Code Remote Development
 
-- VS Code Remote Development
-
-`${HOME}/.vscode-server/data/Machine/settings.json`
-
-Try using symlinks~
-
-$HOME/.config/Code/User/settings.json
-%APPDATA%\Roaming\Code\User\settings.json
+    -   `${HOME}/.vscode-server/data/Machine/settings.json`
