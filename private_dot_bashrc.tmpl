@@ -106,9 +106,8 @@ fi
 # Aliases
 ##########
 
-# default to human readable figures
-alias df='df -h'
-alias du='du -h'
+alias df='df --human-readable'
+alias du='du --human-readable'
 
 alias l='less -r'
 alias m='less -r'
@@ -121,7 +120,7 @@ alias cls='clear'
 
 alias f='find'
 
-alias g='egrep -i --color'
+alias g='egrep --ignore-case --color'
 alias grep='egrep --color'
 alias rg='rg --no-ignore'
 
@@ -133,18 +132,11 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 alias dir='ls'
-alias vdir='ls --color=auto --format=long'
 alias ll='ls -l'
 alias la='ls -A'
 alias lr='ls -R'
 
-alias ga='git add'
-alias gc='git commit'
-alias gd='git diff'
 alias gl='git log --pretty=format:"%h%x09%an%x09%ad%x09%s" --date=short'
-alias gs='git status'
-alias sp='git stash push'
-alias so='git stash pop'
 
 # Adds directory to stack and print.
 function p() {
