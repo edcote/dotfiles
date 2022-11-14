@@ -22,10 +22,10 @@ shopt -s nocaseglob
 # for example, cd /vr/lgo/apaache would find /var/log/apache
 shopt -s cdspell
 
-# http://stackoverflow.com/questions/6418493/bash-variable-expansion-on-tab-complete
+# Replaces directory names with result of expansion on tab complete
 shopt -s direxpand
 
-# check the window size after each command and, if necessary,
+# Check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
@@ -50,9 +50,9 @@ shopt -s histappend
 # Store multiline shell commands
 shopt -s cmdhist
 
-# for setting history length
-export HISTSIZE=1000000
-export HISTFILESIZE=1000000
+# Allow larger .bash_history file
+export HISTSIZE=1000
+export HISTFILESIZE=100000
 
 # Prompt Options
 #################
