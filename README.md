@@ -27,26 +27,28 @@ go install github.com/bazelbuild/buildtools/buildifier@latest
 
 ## Themes
 
--   https://github.com/sonph/onehalf
+- https://github.com/sonph/onehalf
 
 ## Visual Studio Code
 
 ### Location of settings files
 
--   VS Code
+- VS Code
 
-    -   `${HOME}/.config/Code/User/settings.json`
-    -   `%APPDATA%\Roaming\Code\User\settings.json` (Windows)
+  - `${HOME}/.config/Code/User/settings.json` (Linux)
+  - `%APPDATA%\Roaming\Code\User\settings.json` (Windows)
 
--   Visual Studio Code Server
+- VS Code Server
 
-    -   `${HOME}/.local/share/code-server/User/settings.json
-    -   `${HOME}/.local/share/code-server/User/keybindings.json
+Use `code-server --user-data-dir ${HOME}/.config/Code` to pick up local VS Code settings.
+
+Update code-server manually with release tagged linux-amd64 from https://github.com/coder/code-server/releases.
+
+```shell
+$ cd .local
+$ ln -s code-server-4.8.3-linux-amd64 code-server
+```
 
 Use
 [SSH port forwarding](https://github.com/coder/code-server/blob/main/docs/guide.md)
-to access.
-
--   VS Code Remote Development
-
-    -   `${HOME}/.vscode-server/data/Machine/settings.json`
+to access `-L 8080:127.0.0.1:8080`
