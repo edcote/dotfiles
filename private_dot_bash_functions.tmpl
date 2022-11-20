@@ -8,23 +8,21 @@ confirm() {
 export -f confirm
 
 {{ if eq .chezmoi.osRelease.versionID "rodete" }}
-Sunglass() {
+go_sunglass() {
   local number=${1-:1}
   local branch=${2-:rdo}
   local gitroot="${HOME}/gitrepos/sunglass${branch}_${number}"
 
-  pushd "${gitroot}/software" >& /dev/null
-  pushd "${gitroot}/hardware/src/include" >& /dev/null
-  pushd "${gitroot}/hardware/tb" >& /dev/null
-  pushd "${gitroot}/hardware/traces" >& /dev/null
-  pushd "${gitroot}/hardware/test/unit/isp_tracer" >& /dev/null
-  pushd "${gitroot}/hardware/scripts/rtl_gen" >& /dev/null
-  pushd "${gitroot}" >& /dev/null
-  pushd "${gitroot}" >& /dev/null
+  pushd -n "${gitroot}/hardware/tb" >& /dev/null
+  pushd -n "${gitroot}/hardware/traces" >& /dev/null
+  pushd -n "${gitroot}/hardware/test/unit/isp_tracer" >& /dev/null
+  pushd -n "${gitroot}/common/test" >& /dev/null
+  pushd -n "${gitroot}/hardware/scripts/rtl_gen" >& /dev/null
+  pushd -n "${gitroot}" >& /dev/null
   cd "${gitroot}"
   dirs -v
 }
-export -f Sunglass
+export -f go_sunglass
 
 gcert() {
   [[ -n "${TMUX:-}" ]] && eval $(tmx2 show-environment -s)
@@ -65,7 +63,25 @@ hgcleansync() {
   fi
 }
 export -f hgcleansync
+{{ end }}
 
+{{ if (contains "google" .chezmoi.homeDir) }}
+go_mlb() {
+  local number=${1-:1}
+  {{ if eq .chezmoi.osRelease.versionID "rodete" }}
+  local reporoot="${HOME}/repos/mlb_${number}"
+  {{ else }}
+  local reporoot="/google/gchips/workspace/redondo-us/cbf/user/${USER}/repos/mlb_${number}"
+  {{ end }}
+  pushd -n "${reporoot}/infra-tools/src/infratools" >& /dev/null
+  pushd -n "${reporoot}/ip/google" >& /dev/null
+  pushd -n "${reporoot}/vip/google" >& /dev/null
+  pushd -n "${reporoot}/mlb/verif/agents" >& /dev/null
+  pushd -n "${reporoot}/mlb" >& /dev/null
+  cd "${reporoot}/mlb"
+  dirs -v
+}
+export -f go_mlb
 {{ end }}
 
 gitcleansync() {
@@ -83,7 +99,7 @@ gitcleansync() {
 }
 export -f gitcleansync
 
-bgrm() {
+rmbg() {
   if confirm; then
     local tmp=$(mktemp)
     mv $* ${tmp}
@@ -91,6 +107,5 @@ bgrm() {
     \rm -rf ${tmp}
   fi
 }
-
-export -f bgrm
+export -f rmbg
 
