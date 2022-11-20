@@ -8,22 +8,6 @@ confirm() {
 export -f confirm
 
 {{ if eq .chezmoi.osRelease.versionID "rodete" }}
-go_sunglass() {
-  local number=${1-:1}
-  local branch=${2-:rdo}
-  local gitroot="${HOME}/gitrepos/sunglass${branch}_${number}"
-
-  pushd -n "${gitroot}/hardware/tb" >& /dev/null
-  pushd -n "${gitroot}/hardware/traces" >& /dev/null
-  pushd -n "${gitroot}/hardware/test/unit/isp_tracer" >& /dev/null
-  pushd -n "${gitroot}/common/test" >& /dev/null
-  pushd -n "${gitroot}/hardware/scripts/rtl_gen" >& /dev/null
-  pushd -n "${gitroot}" >& /dev/null
-  cd "${gitroot}"
-  dirs -v
-}
-export -f go_sunglass
-
 gcert() {
   [[ -n "${TMUX:-}" ]] && eval $(tmx2 show-environment -s)
   command gcert "$@"
@@ -66,6 +50,22 @@ export -f hgcleansync
 {{ end }}
 
 {{ if (contains "google" .chezmoi.homeDir) }}
+go_sunglass() {
+  local number=${1-:1}
+  local branch=${2-:rdo}
+  local gitroot="${HOME}/gitrepos/sunglass${branch}_${number}"
+
+  pushd -n "${gitroot}/hardware/tb" >& /dev/null
+  pushd -n "${gitroot}/hardware/traces" >& /dev/null
+  pushd -n "${gitroot}/hardware/test/unit/isp_tracer" >& /dev/null
+  pushd -n "${gitroot}/common/test" >& /dev/null
+  pushd -n "${gitroot}/hardware/scripts/rtl_gen" >& /dev/null
+  pushd -n "${gitroot}" >& /dev/null
+  cd "${gitroot}"
+  dirs -v
+}
+export -f go_sunglass
+
 go_mlb() {
   local number=${1-:1}
   {{ if eq .chezmoi.osRelease.versionID "rodete" }}
@@ -108,4 +108,9 @@ rmbg() {
   fi
 }
 export -f rmbg
+
+conda_shell() {
+  eval "$(${HOME}/miniconda3/bin/conda shell.bash hook)"
+}
+export -f conda_shell
 
