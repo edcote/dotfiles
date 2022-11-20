@@ -51,8 +51,8 @@ export -f hgcleansync
 
 {{ if (contains "google" .chezmoi.homeDir) }}
 go_sunglass() {
-  local number=${1-:1}
-  local branch=${2-:rdo}
+  local number=${1:-1}
+  local branch=${2:-rdo}
   local gitroot="${HOME}/gitrepos/sunglass${branch}_${number}"
 
   pushd -n "${gitroot}/hardware/tb" >& /dev/null
@@ -67,7 +67,7 @@ go_sunglass() {
 export -f go_sunglass
 
 go_mlb() {
-  local number=${1-:1}
+  local number=${1:-1}
   {{ if eq .chezmoi.osRelease.versionID "rodete" }}
   local reporoot="${HOME}/repos/mlb_${number}"
   {{ else }}
