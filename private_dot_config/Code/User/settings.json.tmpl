@@ -14,8 +14,10 @@
 {{ end }}
 
     "files.autoSave": "onFocusChange",
+    // End text files with newline
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
 
     "terminal.integrated.allowChords": false,
 
@@ -31,10 +33,13 @@
     "vim.cursorStylePerMode.replace": "block-outline",
     "vim.highlightedyank.enable": true,
 
-    "editor.minimap.enabled": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2,
     "editor.useTabStops": false,
+    "editor.renderWhitespace": "trailing",
     "editor.fontFamily": "'Terminus (TTF)', 'Droid Sans Mono', monospace",
+    "editor.fontLigature" false,
+    "editor.minimap.enabled": false,
 
     "workbench.settings.enableNaturalLanguageSearch": false,
     "workbench.enableExperiments": false,
@@ -43,6 +48,7 @@
     "security.workspace.trust.untrustedFiles": "open",
 
     "telemetry.telemetryLevel": "off",
+
     "extensions.ignoreRecommendations": true,
     "extensions.autoUpdate": false,
 }
