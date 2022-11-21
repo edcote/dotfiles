@@ -1,54 +1,92 @@
 {
 {{ if eq .chezmoi.osRelease.versionID "rodete" }}
-    "bazel.executable": "/usr/bin/bazel",
-    "bazel.buildifierExecutable": "/usr/bin/buildifier",
-    "bazel.buildifierFixOnFormat": true,
+  "bazel.executable": "/usr/bin/bazel",
+  "bazel.buildifierExecutable": "/usr/bin/buildifier",
+  "bazel.buildifierFixOnFormat": true,
+  "bazel.executable": "blaze",
+  //"blaze.ciderd.enable": true,
+  //"blaze.ciderd.machineId": "wilfrid.mtv.corp.google.com",
+  //"editor.defaultFormatter": "google.g3",
+  //"[cpp]": {
+  //  "editor.defaultFormatter": "google.lsp",
+  //},
+  //"[python]": {
+  //  "editor.defaultFormatter": "google.lsp",
+  //},
+  //"workbench.colorTheme": "Cider Dark",
 {{ else if (contains "google" .chezmoi.homeDir) }}
-    "bazel.executable": "/usr/local/google/home/ecote/go/bin/bazelisk",
-    "bazel.buildifierExecutable": "/usr/local/google/home/ecote/go/bin/buildifier",
-    "bazel.buildifierFixOnFormat": true,
+  "bazel.executable": "/usr/local/google/home/ecote/go/bin/bazelisk",
+  "bazel.buildifierExecutable": "/usr/local/google/home/ecote/go/bin/buildifier",
+  "bazel.buildifierFixOnFormat": true,
 {{ else }}
-    "bazel.executable": "/home/edc/go/bin/bazelisk",
-    "bazel.buildifierExecutable": "/home/edc/go/bin/buildifier",
-    "bazel.buildifierFixOnFormat": true,
+  "bazel.executable": "/home/edc/go/bin/bazelisk",
+  "bazel.buildifierExecutable": "/home/edc/go/bin/buildifier",
+  "bazel.buildifierFixOnFormat": true,
 {{ end }}
 
-    "files.autoSave": "onFocusChange",
-    // End text files with newline
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
+  "debug.console.fontSize": 11,
 
-    "terminal.integrated.allowChords": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+  "editor.useTabStops": false,
+  "editor.renderWhitespace": "trailing",
+  "editor.fontFamily": "'Terminus (TTF)', 'Droid Sans Mono', monospace",
+  "editor.fontLigature" false,
+  "editor.minimap.enabled": false,
 
-    "vim.autoindent": false,
-    "vim.cursorStylePerMode.insert": "line",
-    "vim.cursorStylePerMode.visualblock": "block",
-    "vim.hlsearch": true,
-    "vim.useSystemClipboard": true,
-    "vim.statusBarColorControl": true,
-    "vim.mouseSelectionGoesIntoVisualMode": false,
-    "vim.cursorStylePerMode.normal": "block",
-    "vim.cursorStylePerMode.visual": "block",
-    "vim.cursorStylePerMode.replace": "block-outline",
-    "vim.highlightedyank.enable": true,
+  "files.autoSave": "onFocusChange",
+  // End text files with newline
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
 
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2,
-    "editor.useTabStops": false,
-    "editor.renderWhitespace": "trailing",
-    "editor.fontFamily": "'Terminus (TTF)', 'Droid Sans Mono', monospace",
-    "editor.fontLigature" false,
-    "editor.minimap.enabled": false,
+  "pythonIndent.doubleHangingIndent": false,
 
-    "workbench.settings.enableNaturalLanguageSearch": false,
-    "workbench.enableExperiments": false,
-    "workbench.colorTheme": "Visual Studio Dark",
+  "workbench.settings.enableNaturalLanguageSearch": false,
+  "workbench.enableExperiments": false,
+  "workbench.colorTheme": "Visual Studio Dark",
 
-    "security.workspace.trust.untrustedFiles": "open",
+  "scm.inputFontSize": 11,
 
-    "telemetry.telemetryLevel": "off",
+  "security.workspace.trust.untrustedFiles": "open",
+  "terminal.integrated.allowChords": false,
 
-    "extensions.ignoreRecommendations": true,
-    "extensions.autoUpdate": false,
+  "terminal.integrated.fontSize": 11,
+
+  "telemetry.telemetryLevel": "off",
+
+  "extensions.ignoreRecommendations": true,
+  "extensions.autoUpdate": false,
+
+  "vim.autoindent": false,
+  "vim.cursorStylePerMode.insert": "line",
+  "vim.cursorStylePerMode.normal": "block",
+  "vim.cursorStylePerMode.replace": "block-outline",
+  "vim.cursorStylePerMode.visual": "block",
+  "vim.cursorStylePerMode.visualblock": "block",
+  "vim.highlightedyank.enable": true,
+  "vim.hlsearch": true,
+  "vim.mouseSelectionGoesIntoVisualMode": false,
+  "vim.statusBarColorControl": true,
+  "vim.useSystemClipboard": true,
+  "vim.commandLineModeKeyBindingsNonRecursive": [
+    {
+      "key": "alt+right",
+      "command": "workbench.action.nextEditorInGroup"
+    },
+    {
+      "key": "alt+left",
+      "command": "workbench.action.previousEditorInGroup"
+    }
+  ],
+  "vim.handleKeys": {
+    "<Up>": true,
+    "<Down>": true,
+    "<Left>": true,
+    "<Right>": true,
+    "<C-y>": true,
+    "<C-z>": true,
+    "<C-b>": false,
+    "<C-v>": true,
+  },
 }
