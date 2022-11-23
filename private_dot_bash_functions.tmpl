@@ -114,3 +114,36 @@ conda_shell() {
 }
 export -f conda_shell
 
+ssh_agent_add() {
+  local key=$1
+  [[ -n ${key} ]] || key=${HOME}/.ssh/my_very_secure_key
+  ssh-add "${key}"
+}
+export -f ssh_agent_add
+
+ssh_agent_list() {
+  if ssh_agent_alive; then
+    ssh-add -l
+  else
+    echo "ssh-agent not available, run ssh_agent_start?" >& 2
+  fi
+}
+export -f ssh_agent_list
+
+# exit code 0: agent is running
+# exit code 1: agent is running but has no keys
+ssh_agent_alive() {
+  [[ $(ssh-add -l >& /dev/null) -lt 2 ]]
+}
+export -f ssh_agent_alive
+
+ssh_agent_start() {
+  if ! ssh_agent_alive; then
+    if [[ ! -S ${SSH_AUTH_SOCK} ]]; then
+      export SSH_AUTH_SOCK=${HOME}/.ssh/ssh-agent.sock
+    fi
+    ssh-agent -a "${SSH_AUTH_SOCK}"
+  fi
+}
+export -f ssh_agent_start
+
