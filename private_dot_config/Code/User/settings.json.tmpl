@@ -1,9 +1,5 @@
 {
-{{ if eq .chezmoi.osRelease.versionID "rodete" }}
-  "bazel.executable": "/usr/bin/bazel",
-  "bazel.buildifierExecutable": "/usr/bin/buildifier",
-  "bazel.buildifierFixOnFormat": true,
-  "bazel.executable": "blaze",
+  // Blaze
   //"blaze.ciderd.enable": true,
   //"blaze.ciderd.machineId": "wilfrid.mtv.corp.google.com",
   //"editor.defaultFormatter": "google.g3",
@@ -14,6 +10,12 @@
   //  "editor.defaultFormatter": "google.lsp",
   //},
   //"workbench.colorTheme": "Cider Dark",
+
+  // Bazel
+{{ if eq .chezmoi.osRelease.versionID "rodete" }}
+  "bazel.executable": "/usr/bin/bazel",
+  "bazel.buildifierExecutable": "/usr/bin/buildifier",
+  "bazel.buildifierFixOnFormat": true,
 {{ else if (contains "google" .chezmoi.homeDir) }}
   "bazel.executable": "/usr/local/google/home/ecote/go/bin/bazelisk",
   "bazel.buildifierExecutable": "/usr/local/google/home/ecote/go/bin/buildifier",
@@ -22,6 +24,30 @@
   "bazel.executable": "/home/edc/go/bin/bazelisk",
   "bazel.buildifierExecutable": "/home/edc/go/bin/buildifier",
   "bazel.buildifierFixOnFormat": true,
+{{ end }}
+
+  // ms-python.python
+{{ if (contains "redondo" .chezmoi.hostname) }}
+  "python.formatting.provider": "yapf",
+  "python.formatting.yapfPath": "/google/gchips/tools/google/pyformat/20211229/pyformat",
+  "python.formatting.yapfArgs": [],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+{{ else if (contains "google" .chezmoi.homeDir) }}
+  "python.formatting.provider": "yapf",
+  "python.formatting.yapfPath": "/usr/bin/pyformat",
+  "python.formatting.yapfArgs": [],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+{{ else  }}
+  "python.formatting.provider": "yapf",
+  "python.formatting.yapfPath": "yapf",
+  "python.formatting.yapfArgs": [],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
 {{ end }}
 
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -78,4 +104,7 @@
   // redhat.vscode-xml
   "redhat.telemetry.enabled": false,
   "xml.format.splitAttributes": true,
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+   },
 }
