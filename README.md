@@ -42,12 +42,7 @@ go install github.com/bazelbuild/buildtools/buildifier@latest
 
 Use `code-server --user-data-dir ${HOME}/.config/Code` to pick up local VS Code settings.
 
-Update code-server manually with release tagged linux-amd64 from https://github.com/coder/code-server/releases.
-
-```shell
-$ cd .local
-$ ln -s code-server-4.8.3-linux-amd64 code-server
-```
+To upgrade: `curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone`
 
 Use
 [SSH port forwarding](https://github.com/coder/code-server/blob/main/docs/guide.md)
