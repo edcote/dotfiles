@@ -133,7 +133,8 @@ export -f ssh_agent_list
 # exit code 0: agent is running
 # exit code 1: agent is running but has no keys
 ssh_agent_alive() {
-  [[ $(ssh-add -l >& /dev/null) -lt 2 ]]
+  ssh-add -l >& /dev/null
+  [[ $? -lt 2 ]]
 }
 export -f ssh_agent_alive
 
@@ -142,7 +143,7 @@ ssh_agent_start() {
     if [[ ! -S ${SSH_AUTH_SOCK} ]]; then
       export SSH_AUTH_SOCK=${HOME}/.ssh/ssh-agent.sock
     fi
-    ssh-agent -a "${SSH_AUTH_SOCK}"
+    eval $(ssh-agent -a "${SSH_AUTH_SOCK}")
   fi
 }
 export -f ssh_agent_start
