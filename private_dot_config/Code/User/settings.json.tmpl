@@ -15,40 +15,32 @@
 {{ if eq .chezmoi.osRelease.versionID "rodete" }}
   "bazel.executable": "/usr/bin/bazel",
   "bazel.buildifierExecutable": "/usr/bin/buildifier",
-  "bazel.buildifierFixOnFormat": true,
 {{ else if (contains "google" .chezmoi.homeDir) }}
   "bazel.executable": "/usr/local/google/home/ecote/go/bin/bazelisk",
   "bazel.buildifierExecutable": "/usr/local/google/home/ecote/go/bin/buildifier",
-  "bazel.buildifierFixOnFormat": true,
 {{ else }}
   "bazel.executable": "/home/edc/go/bin/bazelisk",
   "bazel.buildifierExecutable": "/home/edc/go/bin/buildifier",
-  "bazel.buildifierFixOnFormat": true,
 {{ end }}
+  "bazel.buildifierFixOnFormat": true,
 
   // ms-python.python
 {{ if (contains "redondo" .chezmoi.hostname) }}
   "python.formatting.provider": "yapf",
   "python.formatting.yapfPath": "/google/gchips/tools/google/pyformat/20211229/pyformat",
   "python.formatting.yapfArgs": [],
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.python"
-  },
 {{ else if (contains "google" .chezmoi.homeDir) }}
   "python.formatting.provider": "yapf",
   "python.formatting.yapfPath": "/usr/bin/pyformat",
   "python.formatting.yapfArgs": [],
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.python"
-  },
 {{ else  }}
   "python.formatting.provider": "yapf",
   "python.formatting.yapfPath": "yapf",
   "python.formatting.yapfArgs": [],
+{{ end }}
   "[python]": {
     "editor.defaultFormatter": "ms-python.python"
   },
-{{ end }}
 
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.tabSize": 2,
@@ -59,7 +51,6 @@
   "editor.minimap.enabled": false,
 
   "files.autoSave": "onFocusChange",
-  // End text files with newline
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
