@@ -42,6 +42,23 @@
     "editor.defaultFormatter": "ms-python.python"
   },
 
+  // eirikpre.systemverilog
+{{ if (contains "redondo" .chezmoi.hostname) }}
+  "systemverilog.disableIndexing": true,
+  "systemverilog.formatCommand": "/google/gchips/tools/google/verible/496600639/verible-verilog-format",
+  "systemverilog.launchConfigurationVerible": "/google/gchips/tools/google/verible/496600639/verible-verilog-lint",
+{{ end }}
+  "systemverilog.compilerType": "Verible",
+  "[systemverilog]": {
+    "editor.defaultFormatter": "eirikpre.systemverilog"
+  },
+
+  // git
+{{ if (contains "redondo" .chezmoi.hostname) }}
+  "git.autorefresh": false,
+  "git.autoRepositoryDetection": false,
+{{ end }}
+
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.tabSize": 2,
   "editor.useTabStops": false,
@@ -54,6 +71,9 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "files.associations": {
+    "*.svp": "systemverilog",
+  },
 
   "security.workspace.trust.untrustedFiles": "open",
 
