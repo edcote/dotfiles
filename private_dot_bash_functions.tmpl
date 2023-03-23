@@ -109,11 +109,6 @@ rmbg() {
 }
 export -f rmbg
 
-conda_shell() {
-  eval "$(${HOME}/miniconda3/bin/conda shell.bash hook)"
-}
-export -f conda_shell
-
 ssh_agent_add() {
   local key=$1
   [[ -n ${key} ]] || key=${HOME}/.ssh/my_very_secure_key
