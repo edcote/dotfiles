@@ -40,6 +40,7 @@ set number
 set laststatus=2
 set nowrap
 set backspace=indent,eol,start
+let g:loaded_matchparen=1
 
 " Search options
 set ignorecase
