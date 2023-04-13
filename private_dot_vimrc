@@ -6,7 +6,7 @@ execute pathogen#infect()
 " Syntax highlighting
 syntax on
 filetype plugin indent off
-" https://github.com/sonph/onehalf/tree/master/vim
+
 colorscheme onehalfdark
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -42,9 +42,9 @@ set ruler
 set number
 set laststatus=2
 set nowrap
-
+set backspace=indent,eol,start
 if has("gui_running")
-  set guifont=Terminus\ Medium\ 11
+  set guifont=Terminus\ Medium\ 13
 endif
 
 " Search options
@@ -52,7 +52,7 @@ set ignorecase
 set hlsearch
 set incsearch
 
-" Key mapping
+" Key mappings
 if &term == "screen-256color"
   map <Esc>[1;5D <C-Left>
   map <Esc>[1;5C <C-Right>
