@@ -39,7 +39,7 @@ shopt -s globstar
 export HISTCONTROL=ignoreboth
 
 # Ignore some controlling instructions
-export HISTIGNORE="[   ]*:&:bg:fg:exit"
+export HISTIGNORE="[   ]*:&:bg:fg:exit:ll:ls*:h"
 
 # Whenever displaying the prompt, write the previous line to disk
 export PROMPT_COMMAND="history -a"
@@ -51,8 +51,8 @@ shopt -s histappend
 shopt -s cmdhist
 
 # Allow larger .bash_history file
-export HISTSIZE=20000
-export HISTFILESIZE=20000
+export HISTSIZE=2000
+export HISTFILESIZE=2000
 
 # Prompt Options
 #################
