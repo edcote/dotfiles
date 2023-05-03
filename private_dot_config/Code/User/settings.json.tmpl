@@ -9,6 +9,9 @@
   //"[python]": {
   //  "editor.defaultFormatter": "google.lsp",
   //},
+  //"[json]": {
+  //  "editor.defaultFormatter": "google.lsp",
+  //},
   //"workbench.colorTheme": "Cider Dark",
 
   // Bazel
@@ -101,7 +104,7 @@
   "vim.hlsearch": true,
   "vim.mouseSelectionGoesIntoVisualMode": false,
   "vim.statusBarColorControl": true,
-  "vim.useSystemClipboard": false,
+  "vim.useSystemClipboard": true,
   "vim.handleKeys": {
     "<Up>": true,
     "<Down>": true,
@@ -112,6 +115,28 @@
     "<C-b>": false,
     "<C-v>": true,
   },
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["u"],
+      "after": [],
+      "commands": [
+        {
+          "command": "undo",
+          "args": []
+        }
+      ]
+    },
+    {
+      "before": ["<C-r>"],
+      "after": [],
+      "commands": [
+        {
+          "command": "redo",
+          "args": []
+        }
+      ]
+    }
+  ],
 
   // redhat.vscode-xml
   "redhat.telemetry.enabled": false,
