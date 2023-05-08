@@ -37,3 +37,4 @@
 	ignored = ls-files --exclude-standard --others --ignored
 	amend = commit --amend --no-edit
 	reword = commit --amend
+	upload = "!git push $(git remote -v | head -1 | awk '{print $1}') HEAD:refs/for/$(git rev-parse --abbrev-ref HEAD)"
