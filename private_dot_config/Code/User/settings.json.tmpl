@@ -1,18 +1,19 @@
 {
   // Blaze
-  //"blaze.ciderd.enable": true,
-  //"blaze.ciderd.machineId": "wilfrid.mtv.corp.google.com",
-  //"editor.defaultFormatter": "google.g3",
-  //"[cpp]": {
-  //  "editor.defaultFormatter": "google.lsp",
-  //},
-  //"[python]": {
-  //  "editor.defaultFormatter": "google.lsp",
-  //},
-  //"[json]": {
-  //  "editor.defaultFormatter": "google.lsp",
-  //},
-  //"workbench.colorTheme": "Cider Dark",
+{{ if eq .chezmoi.osRelease.versionID "rodete" }}
+  "blaze.ciderd.enable": true,
+  "blaze.ciderd.machineId": "wilfrid.mtv.corp.google.com",
+  "editor.defaultFormatter": "google.g3",
+  "[cpp]": {
+    "editor.defaultFormatter": "google.lsp",
+  },
+  "[python]": {
+    "editor.defaultFormatter": "google.lsp",
+  },
+  "[json]": {
+    "editor.defaultFormatter": "google.lsp",
+  },
+{{ end }}
 
   // Bazel
 {{ if eq .chezmoi.osRelease.versionID "rodete" }}
@@ -135,6 +136,13 @@
           "args": []
         }
       ]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": ["<leader>", "/"],
+      "commands": ["editor.action.commentLine"],
+      "when": "editorTextFocus && !editorReadonly"
     }
   ],
 
