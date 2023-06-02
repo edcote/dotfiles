@@ -6,7 +6,13 @@ execute pathogen#infect()
 " Color scheme
 syntax on
 set background=dark
-colorscheme lunaperche
+
+if filereadable(expand("$HOME/.vim/colors/lunaperche.vim"))
+  colorscheme lunaperche
+else
+  colorscheme ron
+endif
+
 if has("gui_running")
   set guifont=Terminus\ Medium\ 13
 endif
@@ -33,7 +39,7 @@ autocmd FilterWritePre * call TrimWhiteSpace()
 autocmd BufWritePre * call TrimWhiteSpace()
 
 " Interface
-set cursorline
+set nocursorline
 set novisualbell
 set ruler
 set number
