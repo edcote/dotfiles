@@ -18,31 +18,17 @@ gsettings set org.gnome.desktop.wm.preferences workspace-names "['rdo0', 'rdo1',
 
 https://extensions.gnome.org/extension/5090/space-bar/
 
-## Go packages
-
-```
-go install github.com/bazelbuild/bazelisk@latest
-go install github.com/bazelbuild/buildtools/buildifier@latest
-```
-
-## Themes
-
-- https://github.com/sonph/onehalf
-
-## Visual Studio Code
-
 ### Location of settings files
 
 - VS Code
-
   - `${HOME}/.config/Code/User/settings.json` (Linux)
   - `%APPDATA%\Roaming\Code\User\settings.json` (Windows)
 
 - VS Code Server
 
-Use `code-server --user-data-dir ${HOME}/.config/Code` to pick up local VS Code settings.
+Start service using: `sudo systemctl enable --now code-server@$USER`
 
-To upgrade: `curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone`
+Upgrade using: `sudo curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone`
 
 Use
 [SSH port forwarding](https://github.com/coder/code-server/blob/main/docs/guide.md)
