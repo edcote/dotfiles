@@ -20,7 +20,8 @@ endif
 " Whitespace
 filetype plugin indent off
 set shiftwidth=2
-set tabstop=2
+set tabstop=4
+set softtabstop=2
 set expandtab
 set noautoindent
 set nosmartindent
