@@ -1,0 +1,6 @@
+# ~/.bash_profile: executed by the command interpreter for login shells.
+umask 022
+
+if [[ -f "${HOME}/.bashrc" ]]; then
+  source "$HOME/.bashrc"
+fi

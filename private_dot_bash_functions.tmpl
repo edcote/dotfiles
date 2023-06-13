@@ -5,20 +5,17 @@ confirm() {
     *) false ;;
   esac
 }
-export -f confirm
 
 {{ if eq .chezmoi.osRelease.versionID "rodete" }}
 gcert() {
   [[ -n "${TMUX:-}" ]] && eval $(tmx2 show-environment -s)
   command gcert "$@"
 }
-export -f gcert
 
 gcertstatus() {
   [[ -n "${TMUX:-}" ]] && eval $(tmx2 show-environment -s)
   command gcertstatus "$@"
 }
-export -f gcertstatus
 
 g4cleansync() {
   if ! [[ -d ${PWD%/google3*}/.citc ]]; then
@@ -32,7 +29,6 @@ g4cleansync() {
     clear
   fi
 }
-export -f g4cleansync
 
 hgcleansync() {
   if ! grep -s -q fig ${PWD%/google3*}/.hg/requires; then
@@ -46,42 +42,6 @@ hgcleansync() {
     clear
   fi
 }
-export -f hgcleansync
-{{ end }}
-
-{{ if (contains "google" .chezmoi.homeDir) }}
-go_sunglass() {
-  local number=${1:-1}
-  local branch=${2:-rdo}
-  local gitroot="${HOME}/gitrepos/sunglass${branch}_${number}"
-
-  pushd -n "${gitroot}/hardware/tb" >& /dev/null
-  pushd -n "${gitroot}/hardware/traces" >& /dev/null
-  pushd -n "${gitroot}/hardware/test/unit/isp_tracer" >& /dev/null
-  pushd -n "${gitroot}/common/test" >& /dev/null
-  pushd -n "${gitroot}/hardware/scripts/rtl_gen" >& /dev/null
-  pushd -n "${gitroot}" >& /dev/null
-  cd "${gitroot}"
-  dirs -v
-}
-export -f go_sunglass
-
-go_mlb() {
-  local number=${1:-1}
-  {{ if eq .chezmoi.osRelease.versionID "rodete" }}
-  local reporoot="${HOME}/repos/mlb_${number}"
-  {{ else }}
-  local reporoot="/google/gchips/workspace/redondo-us/cbf/user/${USER}/repos/mlb_${number}"
-  {{ end }}
-  pushd -n "${reporoot}/infra-tools/src/infratools" >& /dev/null
-  pushd -n "${reporoot}/ip/google" >& /dev/null
-  pushd -n "${reporoot}/vip/google" >& /dev/null
-  pushd -n "${reporoot}/mlb/verif/agents" >& /dev/null
-  pushd -n "${reporoot}/mlb" >& /dev/null
-  cd "${reporoot}/mlb"
-  dirs -v
-}
-export -f go_mlb
 {{ end }}
 
 gitcleansync() {
@@ -97,7 +57,6 @@ gitcleansync() {
     clear
   fi
 }
-export -f gitcleansync
 
 rmbg() {
   if confirm; then
@@ -107,39 +66,47 @@ rmbg() {
     \rm -rf ${tmp}
   fi
 }
-export -f rmbg
 
-ssh_agent_add() {
+ssh-agent-add() {
   local key=$1
   [[ -n ${key} ]] || key=${HOME}/.ssh/my_very_secure_key
   ssh-add "${key}"
 }
-export -f ssh_agent_add
 
-ssh_agent_list() {
-  if ssh_agent_alive; then
+ssh-agent-list() {
+  if ssh-agent-alive; then
     ssh-add -l
   else
-    echo "ssh-agent not available, run ssh_agent_start?" >& 2
+    echo "ssh-agent not available, run ssh-agent-start?" >& 2
   fi
 }
-export -f ssh_agent_list
 
 # exit code 0: agent is running
 # exit code 1: agent is running but has no keys
-ssh_agent_alive() {
+ssh-agent-alive() {
   ssh-add -l >& /dev/null
   [[ $? -lt 2 ]]
 }
-export -f ssh_agent_alive
 
-ssh_agent_start() {
-  if ! ssh_agent_alive; then
+ssh-agent-start() {
+  if ! ssh-agent-alive; then
     if [[ ! -S ${SSH_AUTH_SOCK} ]]; then
       export SSH_AUTH_SOCK=${HOME}/.ssh/ssh-agent.sock
     fi
     eval $(ssh-agent -a "${SSH_AUTH_SOCK}")
   fi
 }
-export -f ssh_agent_start
 
+# Prepends directory to PATH
+pathadd() {
+  if [[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]]; then
+    PATH="$1${PATH:+":$PATH"}"
+  fi
+}
+
+# Adds directory to stack and print
+function p() {
+  local d=${1:-.}
+  pushd "${d}" >& /dev/null || return 1
+  dirs -v
+}

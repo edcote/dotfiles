@@ -6,6 +6,9 @@ case $- in
     *) return;;
 esac
 
+[[ -f "${HOME}/.bash_aliases" ]]   && source "${HOME}/.bash_aliases"
+[[ -f "${HOME}/.bash_functions" ]] && source "${HOME}/.bash_functions"
+
 # Shell Options
 ################
 
@@ -51,109 +54,46 @@ shopt -s histappend
 shopt -s cmdhist
 
 # Allow larger .bash_history file
-export HISTSIZE=2000
-export HISTFILESIZE=2000
+HISTSIZE=2000
+HISTFILESIZE=2000
 
-# Prompt Options
-#################
+# Terminal Options
+###################
 
-# override terminal type set by tmux
+# Override terminal type set by tmux
 case "${TERM}" in
   xterm*)
     export TERM="xterm-256color"
     ;;
 esac
 
-# enable color terminal
+# Enable color terminal
 case "${TERM}" in
   *color)
     color_prompt="yes"
     ;;
 esac
-
 if [[ "${color_prompt}" == "yes" ]]; then
   PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
 else
   PS1="${debian_chroot:+($debian_chroot)}\u@\h:\w\$ "
 fi
-
 unset color_prompt
 
-# shorten paths in prompt
-export PROMPT_DIRTRIM=4
-
-# enable bash-git-prompt
+# Enable bash-git-prompt
 {{ if not (contains "whi" .chezmoi.hostname) }}
-export GIT_PROMPT_ONLY_IN_REPO=1
-export GIT_PROMPT_THEME=Single_line_Minimalist_Ascii
-export GIT_PROMPT_SHOW_UNTRACKED_FILES=no
+GIT_PROMPT_ONLY_IN_REPO=1
+GIT_PROMPT_THEME=Single_line_Minimalist_Ascii
+GIT_PROMPT_SHOW_UNTRACKED_FILES=no
 source "${HOME}/.bash_git_prompt/gitprompt.sh"
 {{ end }}
 
-alias ls='ls --color=auto'
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [[ -f /etc/bash_completion ]]; then
-    . /etc/bash_completion
-  fi
+# Enable programmable completion features
+if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+  source /usr/share/bash-completion/bash_completion
+elif [[ -f /etc/bash_completion ]]; then
+  source /etc/bash_completion
 fi
-
-# Aliases
-##########
-
-alias df='df --human-readable'
-alias du='du --human-readable'
-
-alias l='less -r'
-alias m='less -r'
-alias more='less -r'
-alias less='less -r'
-
-alias h='history'
-alias hgrep='history | grep -i'
-alias cls='clear'
-
-alias f='find'
-
-alias g='egrep --ignore-case --color'
-alias grep='egrep --color'
-alias rg='rg --no-ignore'
-
-alias vi='vim'
-alias gi='gvim'
-
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-
-alias dir='ls'
-alias ll='ls -l'
-alias la='ls -A'
-alias lr='ls -R'
-
-alias gl='git log --pretty=format:"%h%x09%an%x09%ad%x09%s" --date=short'
-
-# Adds directory to stack and print.
-function p() {
-  local d=${1:-.}
-  pushd "${d}" >& /dev/null || return 1
-  dirs -v
-}
-export -f p
-
-# Removes directory from stack and print.
-alias o='popd -n && dirs -v'
-
-# Displays directory stack.
-alias dirs='dirs -v'
-
-# Clears directory stack.
-alias popa='dirs -c'
 
 # Environment Options
 ######################
@@ -161,14 +101,17 @@ alias popa='dirs -c'
 export EDITOR=vim
 export VISUAL=vim
 
-export PATH=${PATH}:${HOME}/bin:${HOME}/go/bin
+# Shorten paths in prompt
+PROMPT_DIRTRIM=4
+
 {{ if (contains "google" .chezmoi.homeDir) }}
-export PATH=${PATH}:${HOME}/hls_infra_tools/common/tools
+pathadd ${HOME}/hls_infra_tools/common/tools
 {{ if eq .chezmoi.osRelease.versionID "rodete" }}
-gcertstatus --nocheck_ssh &>/dev/null || (echo "WARNING: LOAS2 certificate expired")
+gcertstatus --nocheck_ssh &>/dev/null || (echo "WARNING: LOAS2 certificate expired" >& 2)
 export P4DIFF=diff
 {{ end }}
 {{ end }}
 
-[[ -f "${HOME}/.bash_aliases" ]]   && source "${HOME}/.bash_aliases"
-[[ -f "${HOME}/.bash_functions" ]] && source "${HOME}/.bash_functions"
+pathadd ${HOME}/go/bin
+pathadd ${HOME}/.local/bin
+pathadd ${HOME}/bin

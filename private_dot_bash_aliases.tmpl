@@ -1,3 +1,6 @@
+# Aliases
+##########
+
 {{ if eq .chezmoi.osRelease.versionID "rodete" }}
 alias mdformat=/google/data/ro/teams/g3doc/mdformat
 alias pastebin=/google/src/head/depot/eng/tools/pastebin
@@ -9,3 +12,45 @@ alias dcgen=/google/bin/releases/ganeti-sre/cli/dcgen
 alias tmux="${HOME}/miniconda3/bin/tmux"
 {{ end }}
 alias killchrome='killall -s SIGKILL chrome'
+
+alias df='df --human-readable'
+alias du='du --human-readable'
+
+alias l='less -r'
+alias m='less -r'
+alias more='less -r'
+alias less='less -r'
+
+alias h='history'
+alias hgrep='history | grep -i'
+alias cls='clear'
+
+alias f='find'
+
+alias g='egrep --ignore-case --color'
+alias grep='egrep --color'
+alias rg='rg --no-ignore'
+
+alias vi='vim'
+alias gi='gvim'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+alias dir='ls'
+alias ls='ls --color=auto'
+alias ll='ls -l'
+alias la='ls -A'
+alias lr='ls -R'
+
+alias gl='git log --pretty=format:"%h%x09%an%x09%ad%x09%s" --date=short'
+
+# Removes directory from stack and print
+alias o='popd -n && dirs -v'
+
+# Displays directory stack
+alias dirs='dirs -v'
+
+# Clears directory stack
+alias popa='dirs -c'
