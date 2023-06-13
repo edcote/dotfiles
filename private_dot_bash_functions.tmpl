@@ -90,9 +90,6 @@ ssh-agent-alive() {
 
 ssh-agent-start() {
   if ! ssh-agent-alive; then
-    if [[ ! -S ${SSH_AUTH_SOCK} ]]; then
-      export SSH_AUTH_SOCK=${HOME}/.ssh/ssh-agent.sock
-    fi
     eval $(ssh-agent -a "${SSH_AUTH_SOCK}")
   fi
 }
