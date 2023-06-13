@@ -89,9 +89,27 @@ ssh-agent-alive() {
 }
 
 ssh-agent-start() {
-  if ! ssh-agent-alive; then
-    eval $(ssh-agent -a "${SSH_AUTH_SOCK}")
+  local ssh_env=~/.ssh-agent.env
+
+  # First, try with SSH_AUTH_SOCK and SSH_AUTH_PID
+  if [[ -n ${SSH_AUTH_SOCK} ]]; then
+    if ssh-agent-alive; then
+      echo "ssh-agent already running" >& 2
+      return 0
+    fi
   fi
+
+  # Try using ssh_env file
+  if [[ -e ${ssh_env} ]]; then
+    source "${ssh_env}"
+    if ssh-agent-alive; then
+      echo "ssh-agent already running, updated environment" >&2
+      return 0
+    fi
+  fi
+
+  # Create new ssh-agent
+  ssh-agent -s > "${ssh_env}" && source "${ssh_env}"
 }
 
 # Prepends directory to PATH
