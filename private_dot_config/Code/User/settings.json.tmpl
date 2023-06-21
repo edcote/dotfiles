@@ -47,15 +47,29 @@
   },
 
   // eirikpre.systemverilog
+  "systemverilog.compilerType": "Verible",
+  "[systemverilog]": {
+    "editor.defaultFormatter": "eirikpre.systemverilog",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
+    "editor.formatOnType": false
+  },
 {{ if (contains "redondo" .chezmoi.hostname) }}
   "systemverilog.disableIndexing": true,
   "systemverilog.formatCommand": "/google/gchips/tools/google/verible/496600639/verible-verilog-format",
   "systemverilog.launchConfigurationVerible": "/google/gchips/tools/google/verible/496600639/verible-verilog-lint",
+{{ else if eq .chezmoi.osRelease.versionID "rodete" }}
+  "systemverilog.disableIndexing": false,
+  "systemverilog.formatCommand": "/google/bin/releases/platforms-ci2-verible/verible-verilog-format",
+  "systemverilog.launchConfigurationVerible": "/google/bin/releases/platforms-ci2-verible/verible-verilog-format",
+{{ else  }}
+  "systemverilog.disableIndexing": false,
+  "systemverilog.formatCommand": "verible-verilog-format",
+  "systemverilog.launchConfigurationVerible": "verible-verilog-format",
 {{ end }}
-  "systemverilog.compilerType": "Verible",
-  "[systemverilog]": {
-    "editor.defaultFormatter": "eirikpre.systemverilog"
-  },
 
   // golang.go
   "[go]": {
@@ -156,5 +170,13 @@
   "xml.format.splitAttributes": true,
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml"
-   },
+  },
+
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#5f0000",
+    "statusBar.noFolderBackground": "#5f0000",
+    "statusBar.debuggingBackground": "#5f0000"
+  },
+  "workbench.editor.enablePreview": false,
+  "workbench.view.alwaysShowHeaderActions": true,
 }

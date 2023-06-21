@@ -12,4 +12,9 @@ Host github.com
 Host enclave
   HostName nic0.redondo-us-cbf-desktop-ecote-0.us-central1-b.c.gchips-redondo-us.internal.gcpnode.com
   User ecote
+
+Host hls-fpga*mtv.corp.google.com
+    User ecote
+    User seanhaskell
+    IdentityFile ~/.ssh/hls_fpga_node
 {{ end }}
