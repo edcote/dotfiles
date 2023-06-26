@@ -26,7 +26,6 @@ g4cleansync() {
   if confirm; then
     g4 revert //...
     g4 sync
-    clear
   fi
 }
 
@@ -39,9 +38,37 @@ hgcleansync() {
   if confirm; then
     hg revert --all
     hg sync
-    clear
   fi
 }
+export -f hgcleansync
+{{ end }}
+
+{{ if (contains "google" .chezmoi.homeDir) }}
+go_sunglass() {
+  local number=${1:-1}
+  local branch=${2:-rdo}
+  local gitroot="${HOME}/gitrepos/sunglass${branch}_${number}"
+
+  pushd -n "${gitroot}/hardware/tb" >& /dev/null
+  pushd -n "${gitroot}/hardware/traces" >& /dev/null
+  pushd -n "${gitroot}/hardware/test/unit/isp_tracer" >& /dev/null
+  pushd -n "${gitroot}/common/test" >& /dev/null
+  pushd -n "${gitroot}/hardware/scripts/rtl_gen" >& /dev/null
+  pushd -n "${gitroot}" >& /dev/null
+  cd "${gitroot}"
+  dirs -v
+}
+export -f go_sunglass
+
+go_mlb() {
+  local number=${1:-0}
+{{ if eq .chezmoi.osRelease.versionID "rodete" }}
+  cd "${HOME}/repos/mlb_${number}"
+{{ else }}
+  cd "/google/gchips/workspace/redondo-us/cbf/user/${USER}/repos/mlb_${number}"
+{{ end }}
+}
+export -f go_mlb
 {{ end }}
 
 gitcleansync() {
@@ -54,9 +81,21 @@ gitcleansync() {
     git clean -fdx
     git pull --rebase
     git submodule update --init --recursive
-    clear
   fi
 }
+
+repocleansync() {
+  if ! [[ -d .repo ]]; then
+    echo "ERROR: Not in repo top directory" >&2
+    return 1
+  fi
+  repo forall -c 'git status'
+  if confirm; then
+    repo forall -c 'git clean -fdx'
+    repo forall -c 'git pull --rebase'
+  fi
+}
+export -f repocleansync
 
 rmbg() {
   if confirm; then
@@ -77,7 +116,7 @@ ssh-agent-list() {
   if ssh-agent-alive; then
     ssh-add -l
   else
-    echo "ssh-agent not available, run ssh-agent-start?" >& 2
+    echo "ssh-agent not available, run ssh-agent-start?" >&2
   fi
 }
 
@@ -94,7 +133,7 @@ ssh-agent-start() {
   # First, try with SSH_AUTH_SOCK and SSH_AUTH_PID
   if [[ -n ${SSH_AUTH_SOCK} ]]; then
     if ssh-agent-alive; then
-      echo "ssh-agent already running" >& 2
+      echo "ssh-agent already running" >&2
       return 0
     fi
   fi
