@@ -6,7 +6,7 @@ confirm() {
   esac
 }
 
-{{ if eq .chezmoi.osRelease.versionID "rodete" }}
+{{- if eq .chezmoi.osRelease.versionID "rodete" }}
 gcert() {
   [[ -n "${TMUX:-}" ]] && eval $(tmx2 show-environment -s)
   command gcert "$@"
@@ -41,9 +41,9 @@ hgcleansync() {
   fi
 }
 export -f hgcleansync
-{{ end }}
+{{- end }}
 
-{{ if (contains "google" .chezmoi.homeDir) }}
+{{- if (contains "google" .chezmoi.homeDir) }}
 go_sunglass() {
   local number=${1:-1}
   local branch=${2:-rdo}
@@ -62,14 +62,14 @@ export -f go_sunglass
 
 go_mlb() {
   local number=${1:-0}
-{{ if eq .chezmoi.osRelease.versionID "rodete" }}
+{{- if eq .chezmoi.osRelease.versionID "rodete" }}
   cd "${HOME}/repos/mlb_${number}"
-{{ else }}
+{{- else }}
   cd "/google/gchips/workspace/redondo-us/cbf/user/${USER}/repos/mlb_${number}"
-{{ end }}
+{{- end }}
 }
 export -f go_mlb
-{{ end }}
+{{- end }}
 
 gitcleansync() {
   if ! [[ -d .git ]]; then

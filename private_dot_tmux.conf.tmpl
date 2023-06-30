@@ -21,28 +21,28 @@ set -g history-limit 100000
 set -g default-terminal "screen-256color"
 set -ga terminal-overrides ",*256col*:Tc"
 
-{{ if (contains "whi-us" .chezmoi.hostname) }}
-set -g status-bg DarkBlue
-set -g status-fg White
-{{ else if (contains "whi-asia" .chezmoi.hostname) }}
-set -g status-bg DarkRed
-set -g status-fg White
-{{ else if (contains "arthur" .chezmoi.hostname) }}
+{{- if (contains "arthur" .chezmoi.hostname) }}
 set -g status-bg DarkGreen
 set -g status-fg White
-{{ else if (contains "wilfrid" .chezmoi.hostname) }}
+{{- else if (contains "wilfrid" .chezmoi.hostname) }}
 set -g status-bg Gold
 set -g status-fg Black
-{{ else if (contains "nana" .chezmoi.hostname) }}
+{{- else if (contains "nana" .chezmoi.hostname) }}
 set -g status-bg HotPink
 set -g status-fg Black
-{{ else if (contains "redondo" .chezmoi.hostname) }}
+{{- else if (contains "pepe" .chezmoi.hostname) }}
+set -g status-bg DarkBlue
+set -g status-fg Black
+{{- else if (contains "maureen" .chezmoi.hostname) }}
+set -g status-bg DarkBlue
+set -g status-fg Black
+{{- else if (contains "redondo" .chezmoi.hostname) }}
 set -g status-bg DarkMagenta
 set -g status-fg While
-{{ else }}
+{{- else }}
 set -g status-bg Green
 set -g status-fg White
-{{ end }}
+{{- end }}
 
 # Shortcut to navigate panes, client, and windows
 bind -n C-S-Left select-pane -L

@@ -1,15 +1,15 @@
-{{ if (contains "google" .chezmoi.homeDir) }}
+{{- if (contains "google" .chezmoi.homeDir) }}
 [http]
 	cookiefile = /usr/local/google/home/ecote/.gitcookies
-{{ end }}
+{{- end }}
 
 [user]
 	name = Edmond Cote
-{{ if (contains "google" .chezmoi.homeDir) }}
+{{- if (contains "google" .chezmoi.homeDir) }}
 	email = ecote@google.com
-{{ else }}
+{{- else }}
 	email = edmond.cote@gmail.com
-{{ end }}
+{{- end }}
 [color]
 	ui = auto
 [core]
