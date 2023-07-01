@@ -159,8 +159,13 @@ pathadd() {
 }
 
 # Adds directory to stack and print
-function p() {
+p() {
   local d=${1:-.}
   pushd "${d}" >& /dev/null || return 1
   dirs -v
+}
+
+# Update SSH environment variables
+tmux-fix-ssh() {
+  eval $(tmux show-env -s | grep '^SSH_')
 }
