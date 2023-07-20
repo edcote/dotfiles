@@ -6,7 +6,7 @@ confirm() {
   esac
 }
 
-{{- if eq .chezmoi.osRelease.versionID "rodete" }}
+{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
 gcert() {
   [[ -n "${TMUX:-}" ]] && eval $(tmx2 show-environment -s)
   command gcert "$@"
@@ -62,7 +62,7 @@ export -f go_sunglass
 
 go_mlb() {
   local number=${1:-0}
-{{- if eq .chezmoi.osRelease.versionID "rodete" }}
+{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
   cd "${HOME}/repos/mlb_${number}"
 {{- else }}
   cd "/google/gchips/workspace/redondo-us/cbf/user/${USER}/repos/mlb_${number}"

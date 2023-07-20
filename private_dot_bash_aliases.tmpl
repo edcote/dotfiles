@@ -1,7 +1,7 @@
 # Aliases
 ##########
 
-{{- if eq .chezmoi.osRelease.versionID "rodete" }}
+{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
 alias mdformat=/google/data/ro/teams/g3doc/mdformat
 alias pastebin=/google/src/head/depot/eng/tools/pastebin
 alias copybara=/google/bin/releases/copybara/public/copybara/copybara
@@ -9,7 +9,7 @@ alias cloud_ui_enclave_us='cloud-ui --enclave redondo-us --metro cbf'
 alias tmux=tmx2
 alias dcgen=/google/bin/releases/ganeti-sre/cli/dcgen
 alias verible-verilog-format=/google/bin/releases/platforms-ci2-verible/verible-verilog-format
-{{- else if (contains "redondo" .chezmoi.hostname) }}
+{{- else if (contains "redondo" .chezmoi.fqdnHostname) }}
 alias tmux="${HOME}/miniconda3/bin/tmux"
 {{- end }}
 alias killchrome='killall -s SIGKILL chrome'

@@ -1,6 +1,6 @@
 {
   // Blaze
-{{ if eq .chezmoi.osRelease.versionID "rodete" }}
+{{ if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
   "blaze.ciderd.enable": true,
   "blaze.ciderd.machineId": "wilfrid.mtv.corp.google.com",
   "editor.defaultFormatter": "google.g3",
@@ -16,7 +16,7 @@
 {{ end }}
 
   // Bazel
-{{ if eq .chezmoi.osRelease.versionID "rodete" }}
+{{ if (contains "redondo" .chezmoi.fqdnHostname) }}
   "bazel.executable": "/usr/bin/bazel",
   "bazel.buildifierExecutable": "/usr/bin/buildifier",
 {{ else if (contains "google" .chezmoi.homeDir) }}
@@ -29,7 +29,7 @@
   "bazel.buildifierFixOnFormat": true,
 
   // ms-python.python
-{{ if (contains "redondo" .chezmoi.hostname) }}
+{{ if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
   "python.formatting.provider": "yapf",
   "python.formatting.yapfPath": "/google/gchips/tools/google/pyformat/20211229/pyformat",
   "python.formatting.yapfArgs": [],
@@ -57,11 +57,11 @@
     },
     "editor.formatOnType": false
   },
-{{ if (contains "redondo" .chezmoi.hostname) }}
+{{ if (contains "redondo" .chezmoi.fqdnHostname) }}
   "systemverilog.disableIndexing": true,
   "systemverilog.formatCommand": "/google/gchips/tools/google/verible/496600639/verible-verilog-format",
   "systemverilog.launchConfigurationVerible": "/google/gchips/tools/google/verible/496600639/verible-verilog-lint",
-{{ else if eq .chezmoi.osRelease.versionID "rodete" }}
+{{ else if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
   "systemverilog.disableIndexing": false,
   "systemverilog.formatCommand": "/google/bin/releases/platforms-ci2-verible/verible-verilog-format",
   "systemverilog.launchConfigurationVerible": "/google/bin/releases/platforms-ci2-verible/verible-verilog-format",
@@ -77,7 +77,7 @@
   },
 
   // git
-{{ if (contains "redondo" .chezmoi.hostname) }}
+{{ if (contains "redondo" .chezmoi.fqdnHostname) }}
   "git.autorefresh": false,
   "git.autoRepositoryDetection": false,
 {{ end }}

@@ -1,4 +1,4 @@
-{{- if (not (eq .chezmoi.hostname "nana" "pepe")) }}
+{{- if (not (eq .chezmoi.fqdnHostname "nana" "pepe")) }}
 Host nana.edmondcote.com
     HostName nana.edmondcote.com
     User edc
@@ -10,7 +10,7 @@ Host github.com
     IdentityFile ~/.ssh/my_very_secure_key
 {{- end }}
 
-{{- if eq .chezmoi.osRelease.versionID "rodete" }}
+{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
 Host enclave
   HostName nic0.redondo-us-cbf-desktop-ecote-0.us-central1-b.c.gchips-redondo-us.internal.gcpnode.com
   User ecote

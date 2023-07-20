@@ -21,22 +21,22 @@ set -g history-limit 100000
 set -g default-terminal "screen-256color"
 set -ga terminal-overrides ",*256col*:Tc"
 
-{{- if (contains "arthur" .chezmoi.hostname) }}
+{{- if (contains "arthur" .chezmoi.fqdnHostname) }}
 set -g status-bg DarkGreen
 set -g status-fg color251
-{{- else if (contains "wilfrid" .chezmoi.hostname) }}
+{{- else if (contains "wilfrid" .chezmoi.fqdnHostname) }}
 set -g status-bg Gold
 set -g status-fg Black
-{{- else if (contains "nana" .chezmoi.hostname) }}
+{{- else if (contains "nana" .chezmoi.fqdnHostname) }}
 set -g status-bg HotPink
 set -g status-fg Black
-{{- else if (contains "pepe" .chezmoi.hostname) }}
+{{- else if (contains "pepe" .chezmoi.fqdnHostname) }}
 set -g status-bg DarkBlue
 set -g status-fg color251
-{{- else if (contains "maureen" .chezmoi.hostname) }}
+{{- else if (contains "maureen" .chezmoi.fqdnHostname) }}
 set -g status-bg DarkRed
 set -g status-fg color251
-{{- else if (contains "redondo" .chezmoi.hostname) }}
+{{- else if (contains "redondo" .chezmoi.fqdnHostname) }}
 set -g status-bg DarkMagenta
 set -g status-fg White
 {{- else }}
