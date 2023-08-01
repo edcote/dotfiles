@@ -1,53 +1,72 @@
 {
+{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
   // Blaze
-{{ if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
   "blaze.ciderd.enable": true,
   "blaze.ciderd.machineId": "wilfrid.mtv.corp.google.com",
   "editor.defaultFormatter": "google.g3",
-  "[cpp]": {
-    "editor.defaultFormatter": "google.lsp",
-  },
-  "[python]": {
-    "editor.defaultFormatter": "google.lsp",
-  },
-  "[json]": {
-    "editor.defaultFormatter": "google.lsp",
-  },
-{{ end }}
+{{- end }}
 
   // Bazel
-{{ if (contains "redondo" .chezmoi.fqdnHostname) }}
+{{- if (contains "redondo" .chezmoi.fqdnHostname) }}
   "bazel.executable": "/usr/bin/bazel",
   "bazel.buildifierExecutable": "/usr/bin/buildifier",
-{{ else if (contains "google" .chezmoi.homeDir) }}
+{{- else if (contains "google" .chezmoi.homeDir) }}
   "bazel.executable": "/usr/local/google/home/ecote/go/bin/bazelisk",
   "bazel.buildifierExecutable": "/usr/local/google/home/ecote/go/bin/buildifier",
-{{ else }}
+{{- else }}
   "bazel.executable": "/home/edc/go/bin/bazelisk",
   "bazel.buildifierExecutable": "/home/edc/go/bin/buildifier",
-{{ end }}
+{{- end }}
   "bazel.buildifierFixOnFormat": true,
 
   // ms-python.python
-{{ if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
+{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
   "python.formatting.provider": "yapf",
   "python.formatting.yapfPath": "/usr/bin/pyformat",
   "python.formatting.yapfArgs": [],
-{{ else if (contains "google" .chezmoi.homeDir) }}
+{{- else if (contains "google" .chezmoi.homeDir) }}
   "python.formatting.provider": "yapf",
   "python.formatting.yapfPath": "/google/gchips/tools/google/pyformat/20211229/pyformat",
   "python.formatting.yapfArgs": [],
-{{ else  }}
+{{- else  }}
   "python.formatting.provider": "yapf",
   "python.formatting.yapfPath": "yapf",
   "python.formatting.yapfArgs": [],
-{{ end }}
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.python"
-  },
+{{- end }}
 
   // eirikpre.systemverilog
   "systemverilog.compilerType": "Verible",
+{{- if (contains "redondo" .chezmoi.fqdnHostname) }}
+  "systemverilog.disableIndexing": true,
+  "systemverilog.formatCommand": "/google/gchips/tools/google/verible/496600639/verible-verilog-format",
+  "systemverilog.launchConfigurationVerible": "/google/gchips/tools/google/verible/496600639/verible-verilog-lint",
+{{- else if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
+  "systemverilog.disableIndexing": false,
+  "systemverilog.formatCommand": "/google/bin/releases/platforms-ci2-verible/verible-verilog-format",
+  "systemverilog.launchConfigurationVerible": "/google/bin/releases/platforms-ci2-verible/verible-verilog-format",
+{{- else  }}
+  "systemverilog.disableIndexing": false,
+  "systemverilog.formatCommand": "verible-verilog-format",
+  "systemverilog.launchConfigurationVerible": "verible-verilog-format",
+{{- end }}
+
+{{- if (contains "redondo" .chezmoi.fqdnHostname) }}
+  // git
+  "git.autorefresh": false,
+  "git.autoRepositoryDetection": false,
+{{- end }}
+
+  // editor
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+  "[cpp]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
   "[systemverilog]": {
     "editor.defaultFormatter": "eirikpre.systemverilog",
     "editor.quickSuggestions": {
@@ -57,38 +76,21 @@
     },
     "editor.formatOnType": false
   },
-{{ if (contains "redondo" .chezmoi.fqdnHostname) }}
-  "systemverilog.disableIndexing": true,
-  "systemverilog.formatCommand": "/google/gchips/tools/google/verible/496600639/verible-verilog-format",
-  "systemverilog.launchConfigurationVerible": "/google/gchips/tools/google/verible/496600639/verible-verilog-lint",
-{{ else if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
-  "systemverilog.disableIndexing": false,
-  "systemverilog.formatCommand": "/google/bin/releases/platforms-ci2-verible/verible-verilog-format",
-  "systemverilog.launchConfigurationVerible": "/google/bin/releases/platforms-ci2-verible/verible-verilog-format",
-{{ else  }}
-  "systemverilog.disableIndexing": false,
-  "systemverilog.formatCommand": "verible-verilog-format",
-  "systemverilog.launchConfigurationVerible": "verible-verilog-format",
-{{ end }}
-
-  // golang.go
-  "[go]": {
-    "editor.defaultFormatter": "golang.go"
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
-
-  // git
-{{ if (contains "redondo" .chezmoi.fqdnHostname) }}
-  "git.autorefresh": false,
-  "git.autoRepositoryDetection": false,
-{{ end }}
-
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
   "editor.tabSize": 2,
   "editor.useTabStops": false,
   "editor.renderWhitespace": "trailing",
   "editor.fontFamily": "'Terminus (TTF)', 'Droid Sans Mono', monospace",
   "editor.fontLigature": false,
   "editor.minimap.enabled": false,
+
+  "extensions.ignoreRecommendations": true,
+  "extensions.autoUpdate": false,
 
   "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
@@ -98,20 +100,20 @@
     "*.svp": "systemverilog",
   },
 
+  "output.smartScroll.enabled": false,
+
   "security.workspace.trust.untrustedFiles": "open",
 
   "terminal.integrated.allowChords": false,
 
   "telemetry.telemetryLevel": "off",
 
-  "workbench.settings.enableNaturalLanguageSearch": false,
-  "workbench.enableExperiments": false,
   "workbench.colorTheme": "Visual Studio Dark",
+  "workbench.editor.enablePreview": false,
+  "workbench.enableExperiments": false,
+  "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.startupEditor": "none",
-
-  // Extension settings
-  "extensions.ignoreRecommendations": true,
-  "extensions.autoUpdate": false,
+  "workbench.view.alwaysShowHeaderActions": true,
 
   // vscodevim.vim
   "vim.autoindent": false,
@@ -168,15 +170,4 @@
   // redhat.vscode-xml
   "redhat.telemetry.enabled": false,
   "xml.format.splitAttributes": true,
-  "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml"
-  },
-
-  "workbench.colorCustomizations": {
-    "statusBar.background": "#5f0000",
-    "statusBar.noFolderBackground": "#5f0000",
-    "statusBar.debuggingBackground": "#5f0000"
-  },
-  "workbench.editor.enablePreview": false,
-  "workbench.view.alwaysShowHeaderActions": true,
 }
