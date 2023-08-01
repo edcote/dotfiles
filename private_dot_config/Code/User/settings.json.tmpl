@@ -31,11 +31,11 @@
   // ms-python.python
 {{ if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
   "python.formatting.provider": "yapf",
-  "python.formatting.yapfPath": "/google/gchips/tools/google/pyformat/20211229/pyformat",
+  "python.formatting.yapfPath": "/usr/bin/pyformat",
   "python.formatting.yapfArgs": [],
 {{ else if (contains "google" .chezmoi.homeDir) }}
   "python.formatting.provider": "yapf",
-  "python.formatting.yapfPath": "/usr/bin/pyformat",
+  "python.formatting.yapfPath": "/google/gchips/tools/google/pyformat/20211229/pyformat",
   "python.formatting.yapfArgs": [],
 {{ else  }}
   "python.formatting.provider": "yapf",
