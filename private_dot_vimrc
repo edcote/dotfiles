@@ -1,11 +1,13 @@
 set nocompatible
 
 " Plugins
-execute pathogen#infect()
+call pathogen#infect()
+call pathogen#helptags()
 
-" Color scheme
+" Colorscheme
 syntax on
 set background=dark
+let g:python_highlight_all = 1
 
 if filereadable(expand("$HOME/.vim/colors/lunaperche.vim"))
   colorscheme lunaperche
