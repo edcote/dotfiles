@@ -7,13 +7,14 @@ call pathogen#helptags()
 " Colorscheme
 syntax on
 set background=dark
-let g:python_highlight_all = 1
-
-if filereadable(expand("$HOME/.vim/colors/lunaperche.vim"))
+try
   colorscheme lunaperche
-else
-  colorscheme ron
-endif
+  catch
+  try
+    colorscheme ron
+    catch
+  endtry
+endtry
 
 if has("gui_running")
   set guifont=Terminus\ Medium\ 13

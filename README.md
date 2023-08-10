@@ -1,5 +1,14 @@
 # My dotfiles README
 
+## chezmoi
+
+Clear the state of all `run_onchange_` and `run_once_` scripts:
+
+```
+$ chezmoi state delete-bucket --bucket=scriptState
+```
+
+
 ## GNOME
 
 To export: `dconf dump / > dconf_gnome.ini`
@@ -33,3 +42,4 @@ Upgrade using: `sudo curl -fsSL https://code-server.dev/install.sh | sh -s -- --
 Use
 [SSH port forwarding](https://github.com/coder/code-server/blob/main/docs/guide.md)
 to access `-L 8080:127.0.0.1:8080`
+
