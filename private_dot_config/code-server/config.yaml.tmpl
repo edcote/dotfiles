@@ -1,0 +1,10 @@
+{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
+bind-addr: localhost:49363
+{{- else }}
+bind-addr: localhost:9999
+{{- end }}
+extensions-dir: {{ .chezmoi.homeDir }}/.vscode/extensions
+user-data-dir: {{ .chezmoi.homeDir }}/.config/Code
+auth: none
+cert: false
+disable-telemetry: true

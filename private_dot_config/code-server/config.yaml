@@ -1,6 +1,0 @@
-bind-addr: localhost:49363
-auth: none
-cert: false
-disable-telemetry: true
-extensions-dir: /usr/local/google/home/ecote/.vscode/extensions
-user-data-dir: /usr/local/google/home/ecote/.config/Code

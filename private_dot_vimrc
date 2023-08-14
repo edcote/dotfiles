@@ -5,6 +5,7 @@ call pathogen#infect()
 call pathogen#helptags()
 
 " Colorscheme
+let g:python_highlight_all=1
 syntax on
 set background=dark
 try
