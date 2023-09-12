@@ -1,0 +1,14 @@
+{{ if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
+bind-addr: localhost:49363
+extensions-dir: /usr/local/google/home/ecote/.vscode/extensions
+user-data-dir: /usr/local/google/home/ecote/.config/Code
+disable-telemetry: true
+{{ else if (contains "redondo" .chezmoi.fqdnHostname) }}
+bind-addr: localhost:49363
+extensions-dir: /usr/local/google/home/ecote/.vscode/extensions
+user-data-dir: /usr/local/google/home/ecote/.config/Code
+disable-telemetry: true
+{{ else }}
+{{ end }}
+auth: none
+cert: false
