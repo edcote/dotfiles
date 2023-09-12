@@ -35,26 +35,27 @@
 {{- end }}
   "python.testing.unittestEnabled": true,
 
-//  // eirikpre.systemverilog https://github.com/eirikpre/VSCode-SystemVerilog
-//  "systemverilog.compilerType": "Verible",
-//{{- if (contains "redondo" .chezmoi.fqdnHostname) }}
-//  "systemverilog.disableIndexing": true,
-//  "systemverilog.formatCommand":              "/google/gchips/tools/google/verible/0.0-3410/bin/verible-verilog-format",
-//  "systemverilog.launchConfigurationVerible": "/google/gchips/tools/google/verible/0.0-3410/bin/verible-verilog-lint",
-//{{- else if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
-//  "systemverilog.disableIndexing": false,
-//  "systemverilog.formatCommand":              "/google/bin/releases/platforms-ci2-verible/verible-verilog-format",
-//  "systemverilog.launchConfigurationVerible": "/google/bin/releases/platforms-ci2-verible/verible-verilog-lint",
-//{{- else  }}
-//  "systemverilog.disableIndexing": false,
-//  "systemverilog.formatCommand": "verible-verilog-format",
-//  "systemverilog.launchConfigurationVerible": "verible-verilog-format",
-//{{- end }}
-
+  // eirikpre.systemverilog https://github.com/eirikpre/VSCode-SystemVerilog
+  "systemverilog.compilerType": "Verible",
 {{- if (contains "redondo" .chezmoi.fqdnHostname) }}
-  "verible.path": "/google/gchips/tools/google/verible/0.0-3410/bin/verible-verilog-ls",
+  "systemverilog.disableIndexing": true,
+  "systemverilog.formatCommand": "/google/gchips/tools/google/verible/0.0-3410/bin/verible-verilog-format",
+  "systemverilog.launchConfigurationVerible": "/google/gchips/tools/google/verible/0.0-3410/bin/verible-verilog-lint",
 {{- else if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
-  "verible.path": "/google/bin/releases/platforms-ci2-verible/verible-verilog-ls",
+  "systemverilog.disableIndexing": false,
+  "systemverilog.formatCommand": "/google/bin/releases/platforms-ci2-verible/verible-verilog-format",
+  "systemverilog.launchConfigurationVerible": "/google/bin/releases/platforms-ci2-verible/verible-verilog-lint",
+{{- else  }}
+  "systemverilog.disableIndexing": false,
+  "systemverilog.formatCommand": "verible-verilog-format",
+  "systemverilog.launchConfigurationVerible": "verible-verilog-format",
+{{- end }}
+
+  // Try again when this is fixed: https://github.com/chipsalliance/verible/issues/1363
+{{- if (contains "redondo" .chezmoi.fqdnHostname) }}
+  // "verible.path": "/google/gchips/tools/google/verible/0.0-3410/bin/verible-verilog-ls",
+{{- else if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
+  // "verible.path": "/google/bin/releases/platforms-ci2-verible/verible-verilog-ls",
 {{- end }}
 
 {{- if (contains "redondo" .chezmoi.fqdnHostname) }}
@@ -75,13 +76,13 @@
     "editor.defaultFormatter": "xaver.clang-format"
   },
   "[systemverilog]": {
-    "editor.defaultFormatter": "chipsalliance.verible",
-//    "editor.defaultFormatter": "eirikpre.systemverilog",
-//    "editor.quickSuggestions": {
-//      "comments": "off",
-//      "strings": "off",
-//      "other": "off"
-//    },
+    // "editor.defaultFormatter": "chipsalliance.verible",
+    "editor.defaultFormatter": "eirikpre.systemverilog",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
     "editor.formatOnType": false
   },
   "[json]": {
