@@ -51,8 +51,6 @@
 //  "systemverilog.launchConfigurationVerible": "verible-verilog-format",
 //{{- end }}
 
-  chipsalliance.verible
-
 {{- if (contains "redondo" .chezmoi.fqdnHostname) }}
   "verible.path": "/google/gchips/tools/google/verible/0.0-3410/bin/verible-verilog-ls",
 {{- else if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
