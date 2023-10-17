@@ -8,7 +8,6 @@ Clear the state of all `run_onchange_` and `run_once_` scripts:
 $ chezmoi state delete-bucket --bucket=scriptState
 ```
 
-
 ## GNOME
 
 To export: `dconf dump / > dconf_gnome.ini`
@@ -25,7 +24,9 @@ gsettings set org.gnome.desktop.wm.preferences workspace-names "['rdo0', 'rdo1',
 
 ### Shell extensions
 
-https://extensions.gnome.org/extension/5090/space-bar/
+- https://extensions.gnome.org/extension/5090/space-bar/
+- https://github.com/home-sweet-gnome/dash-to-panel
+- https://github.com/Leleat/Tiling-Assistant
 
 ### Location of settings files
 
