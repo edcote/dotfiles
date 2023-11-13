@@ -141,40 +141,22 @@
     "<Down>": true,
     "<Left>": true,
     "<Right>": true,
-    "<C-y>": true,
-    "<C-z>": true,
-    "<C-b>": false,
-    "<C-v>": true,
+    "<C-R>": true, // Redo
+    "<C-V>": true, // Enter visual block mode
+    "<C-W>": true, // Split prefix
+    // Page up and down
+    "<C-B>": true,
+    "<C-F>": true,
+    "<C-U>": true,
+    "<C-D>": true,
+    // Move screen up and down one line
+    "<C-Y>": true,
+    "<C-E>": true,
+    // Move screen up and down one line
+    "<C-I>": true,
+    "<C-O>": true,
+
   },
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": ["u"],
-      "after": [],
-      "commands": [
-        {
-          "command": "undo",
-          "args": []
-        }
-      ]
-    },
-    {
-      "before": ["<C-r>"],
-      "after": [],
-      "commands": [
-        {
-          "command": "redo",
-          "args": []
-        }
-      ]
-    }
-  ],
-  "vim.visualModeKeyBindings": [
-    {
-      "before": ["<leader>", "/"],
-      "commands": ["editor.action.commentLine"],
-      "when": "editorTextFocus && !editorReadonly"
-    }
-  ],
 
   // redhat.vscode-xml
   "redhat.telemetry.enabled": false,
