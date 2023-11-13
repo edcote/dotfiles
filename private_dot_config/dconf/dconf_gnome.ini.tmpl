@@ -52,15 +52,6 @@ switch-windows=['<Alt>Tab']
 switch-windows-backward=['<Shift><Alt>Tab']
 unmaximize=@as []
 
-[desktop/wm/preferences]
-auto-raise=true
-button-layout='appmenu:minimize,maximize,close'
-focus-mode='click'
-mouse-button-modifier='<Super>'
-num-workspaces=6
-titlebar-font='Cantarell Bold 10'
-workspace-names=@as []
-
 [org/blueman/plugins/powermanager]
 auto-power-on=false
 
@@ -276,25 +267,46 @@ use-theme-colors=true
 visible-name='My Very Own Profile'
 
 [org/gtk/gtk4/settings/file-chooser]
+date-format='regular'
+location-mode='filename-entry'
 show-hidden=false
+show-size-column=true
+sidebar-width=200
+sort-column='name'
 sort-directories-first=false
+sort-directories-first=false
+sort-order='ascending'
+type-format='category'
+view-type='list'
+window-size=(800, 1200)
 
-[settings-daemon/plugins/media-keys]
-area-screenshot-clip=['<Primary><Shift>F5']
-calculator=['<Super>c']
-custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
-search=['<Super>s']
-www=['<Super>i']
+[org/gnome/settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']
 
-[settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
 binding='<Super>e'
-command='gnome-terminal'
+command='/usr/bin/gnome-terminal'
 name='Terminal'
 
-[settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
 binding='<Super>g'
 command='/usr/bin/gvim'
 name='vim'
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
+binding='<Super>i'
+command='/opt/google/chrome/google-chrome'
+name='Chrome'
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3]
+binding='<Super>c'
+command='/usr/bin/gnome-calculator'
+name='Calculator'
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4]
+binding='<Super>v'
+command='code --enable-features=UseOzonePlatform,WaylandWindowDecorations'
+name='Code'
 
 [shell/app-switcher]
 current-workspace-only=true
