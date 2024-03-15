@@ -44,22 +44,6 @@ export -f hgcleansync
 {{- end }}
 
 {{- if (contains "google" .chezmoi.homeDir) }}
-go_sunglass() {
-  local number=${1:-1}
-  local branch=${2:-rdo}
-  local gitroot="${HOME}/gitrepos/sunglass${branch}_${number}"
-
-  pushd -n "${gitroot}/hardware/tb" >& /dev/null
-  pushd -n "${gitroot}/hardware/traces" >& /dev/null
-  pushd -n "${gitroot}/hardware/test/unit/isp_tracer" >& /dev/null
-  pushd -n "${gitroot}/common/test" >& /dev/null
-  pushd -n "${gitroot}/hardware/scripts/rtl_gen" >& /dev/null
-  pushd -n "${gitroot}" >& /dev/null
-  cd "${gitroot}"
-  dirs -v
-}
-export -f go_sunglass
-
 go_mlb() {
   local number=${1:-0}
 {{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
@@ -97,13 +81,10 @@ repocleansync() {
 }
 export -f repocleansync
 
-rmbg() {
-  if confirm; then
-    local tmp=$(mktemp)
-    mv $* ${tmp}
-    \rm -rf $*
-    \rm -rf ${tmp}
-  fi
+bgrm() {
+   local tmp=$(mktemp -p . -d bgrm.XXXXXXXXXX)
+   mv $* ${tmp}
+   (\rm -rf $* && \rm -rf ${tmp}) &
 }
 
 ssh-agent-add() {
