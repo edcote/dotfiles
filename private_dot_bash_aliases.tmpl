@@ -2,12 +2,12 @@
 ##########
 
 {{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
-alias cloud-ui='cloud-ui --enclave redondo-us --metro cbf'
 alias code='code --disable-gpu'
 alias copybara=/google/bin/releases/copybara/public/copybara/copybara
 alias dcgen=/google/bin/releases/ganeti-sre/cli/dcgen
 alias mdformat=/google/data/ro/teams/g3doc/mdformat
 alias pastebin=/google/src/head/depot/eng/tools/pastebin
+alias edacloud=/google/bin/releases/englab-eda/cli/edacloud
 alias tmux=tmx2
 alias verilog-format=/google/bin/releases/platforms-ci2-verible/verible-verilog-format
 alias verilog-lint=/google/bin/releases/platforms-ci2-verible/verible-verilog-lint
