@@ -4,6 +4,9 @@
   "blaze.ciderd.enable": true,
   "blaze.ciderd.machineId": "wilfrid.mtv.corp.google.com",
   "editor.defaultFormatter": "google.g3",
+
+  // Duet AI
+  "cloudcode.duetAI.project": "google.com:ecote-sandbox",
 {{- end }}
 
   // Bazel
@@ -98,8 +101,7 @@
   "editor.fontLigature": false,
   "editor.minimap.enabled": false,
 
-  "extensions.ignoreRecommendations": true,
-  "extensions.autoUpdate": false,
+  "extensions.autoUpdate": "onlySelectedExtensions",
 
   "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
@@ -155,7 +157,12 @@
     // Move screen up and down one line
     "<C-I>": true,
     "<C-O>": true,
-
+    // Move to {top,middle,last} line of screen
+    "<H>": true,
+    "<M>": true,
+    "<L>": true,
+    // Move to last line of file
+    "<G>": true
   },
 
   // redhat.vscode-xml
