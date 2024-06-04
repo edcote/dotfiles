@@ -116,8 +116,10 @@
   "security.workspace.trust.untrustedFiles": "open",
 
   "terminal.integrated.allowChords": false,
-
   "telemetry.telemetryLevel": "off",
+  "terminal.integrated.commandsToSkipShell": [
+    "-workbench.action.quickOpen" // Allow Ctrl-P to reach the shell
+  ],
 
   "workbench.colorTheme": "Visual Studio Dark",
   "workbench.editor.enablePreview": false,
