@@ -40,19 +40,14 @@ hgcleansync() {
     hg sync
   fi
 }
-export -f hgcleansync
-{{- end }}
 
-{{- if (contains "google" .chezmoi.homeDir) }}
-go_mlb() {
-  local number=${1:-0}
-{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
-  cd "${HOME}/repos/mlb_${number}"
-{{- else }}
-  cd "/google/gchips/workspace/redondo-us/cbf/user/${USER}/repos/mlb_${number}"
-{{- end }}
+blaze-bin() {
+  blaze info blaze-bin
 }
-export -f go_mlb
+
+workspace() {
+  blaze info workspace
+}
 {{- end }}
 
 gitcleansync() {
@@ -79,7 +74,6 @@ repocleansync() {
     repo forall -c 'git pull --rebase'
   fi
 }
-export -f repocleansync
 
 bgrm() {
    local tmp=$(mktemp -p . -d bgrm.XXXXXXXXXX)
