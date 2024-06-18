@@ -68,6 +68,7 @@ endif
 
 noremap <C-d> :bdelete<CR>
 noremap <C-n> :bnext<CR>
+noremap <C-m> :wnext<CR>
 noremap <C-p> :bprev<CR>
 
 " Save files when window loses focus
