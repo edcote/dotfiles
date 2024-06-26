@@ -1,32 +1,38 @@
+// Place your key bindings in this file to override the defaults
 [
+  // Use alt+left instead of ctrl+pageup to move to previous editor in group
   {
     "key": "alt+left",
     "command": "workbench.action.previousEditorInGroup"
   },
   {
-    "key": "ctrl+k ctrl+pageup",
+    "key": "ctrl+pageup",
     "command": "-workbench.action.previousEditorInGroup"
   },
+  // Use alt+right instead of ctrl+pagedown to move to next editor in group
   {
     "key": "alt+right",
     "command": "workbench.action.nextEditorInGroup"
   },
   {
-    "key": "ctrl+k ctrl+pagedown",
+    "key": "ctrl+pagedown",
     "command": "-workbench.action.nextEditorInGroup"
   },
+  // Unmap ctrl+e from quick open action
   {
     "key": "ctrl+e",
-    "command": "workbench.action.quickOpen",
+    "command": "-workbench.action.quickOpen",
+  },
+  // Clipboard
+  {
+    "key": "ctrl+shift+c",
+    "command": "-workbench.action.terminal.new",
     "when": "!terminalFocus"
-   },
-   {
-     "key": "ctrl+e",
-     "command": "-workbench.action.quickOpen"
-   },
-   {
-     "key": "ctrl+shift+c",
-     "command": "-workbench.action.terminal.new",
-     "when": "!terminalFocus"
-   }
+  },
+  {
+    "key": "ctrl+shift+c",
+    "command": "editor.action.clipboardCopyAction",
+    "when": "!terminalFocus"
+  }
 ]
+
