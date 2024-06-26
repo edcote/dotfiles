@@ -1,11 +1,32 @@
 [
-    {
-        "key": "ctrl+e",
-        "command": "workbench.action.quickOpen",
-        "when": "!terminalFocus"
-    },
-    {
-        "key": "ctrl+e",
-        "command": "-workbench.action.quickOpen"
-    }
+  {
+    "key": "alt+left",
+    "command": "workbench.action.previousEditorInGroup"
+  },
+  {
+    "key": "ctrl+k ctrl+pageup",
+    "command": "-workbench.action.previousEditorInGroup"
+  },
+  {
+    "key": "alt+right",
+    "command": "workbench.action.nextEditorInGroup"
+  },
+  {
+    "key": "ctrl+k ctrl+pagedown",
+    "command": "-workbench.action.nextEditorInGroup"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "workbench.action.quickOpen",
+    "when": "!terminalFocus"
+   },
+   {
+     "key": "ctrl+e",
+     "command": "-workbench.action.quickOpen"
+   },
+   {
+     "key": "ctrl+shift+c",
+     "command": "-workbench.action.terminal.new",
+     "when": "!terminalFocus"
+   }
 ]
