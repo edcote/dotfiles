@@ -41,6 +41,15 @@ hgcleansync() {
   fi
 }
 
+hg_upload_this() {
+  hg xl | grep @ | awk '{print $2}' | xargs echo hg upload --no-snapshot-in-critique -r >&2
+  echo hg evolve >&2
+  if confirm; then
+    hg xl | grep @ | awk '{print $2}' | xargs hg upload --no-snapshot-in-critique -r
+    hg evolve
+  fi
+}
+
 blaze-bin() {
   blaze info blaze-bin
 }
