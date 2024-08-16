@@ -1,4 +1,4 @@
-{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
+{{- if (contains ".goog" .chezmoi.fqdnHostname) }}
 alias code='code --disable-gpu'
 alias copybara=/google/bin/releases/copybara/public/copybara/copybara
 alias dcgen=/google/bin/releases/ganeti-sre/cli/dcgen

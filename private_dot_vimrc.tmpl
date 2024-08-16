@@ -8,7 +8,7 @@ call plug#begin()
 Plug 'prabirshrestha/vim-lsp'
 call plug#end()
 
-{{ if (contains "corp.google.com" .chezmoi.fqdnHostname) -}}
+{{ if (contains ".goog" .chezmoi.fqdnHostname) -}}
 " Language Server (LSP)
 autocmd User lsp_setup call lsp#register_server({
   \  'cmd': {server_info->[

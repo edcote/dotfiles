@@ -6,7 +6,7 @@ confirm() {
   esac
 }
 
-{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
+{{- if (contains ".goog" .chezmoi.fqdnHostname) }}
 gcert() {
   [[ -n "${TMUX:-}" ]] && eval $(tmx2 show-environment -s)
   command gcert "$@"

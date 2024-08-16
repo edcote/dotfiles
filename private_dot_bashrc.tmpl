@@ -106,7 +106,7 @@ PROMPT_DIRTRIM=4
 
 {{- if (contains "google" .chezmoi.homeDir) }}
 pathadd ${HOME}/hls_infra_tools/common/tools
-{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
+{{- if (contains ".goog" .chezmoi.fqdnHostname) }}
 gcertstatus --nocheck_ssh &>/dev/null || (echo "WARNING: LOAS2 certificate expired" >& 2)
 export P4DIFF=diff
 {{- end }}
