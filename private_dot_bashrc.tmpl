@@ -9,6 +9,11 @@ esac
 [[ -f "${HOME}/.bash_aliases" ]]   && source "${HOME}/.bash_aliases"
 [[ -f "${HOME}/.bash_functions" ]] && source "${HOME}/.bash_functions"
 
+{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
+gcertstatus --nocheck_ssh &>/dev/null || (echo "WARNING: LOAS2 certificate expired" >& 2)
+export P4DIFF=diff
+{{- end }}
+
 # Shell Options
 ################
 
@@ -35,28 +40,6 @@ shopt -s checkwinsize
 # Match all files in subdirectories with **
 shopt -s globstar
 
-# History Options
-##################
-
-# Don't put duplicate lines in the history and clean up meaningless whitespace
-export HISTCONTROL=ignoreboth:erasedups
-
-# Ignore some controlling instructions
-export HISTIGNORE="[   ]*:&:bg:fg:exit:ll:ls*"
-
-# Whenever displaying the prompt, write the previous line to disk
-export PROMPT_COMMAND="history -a"
-
-# Apend to the history file, don't overwrite it
-shopt -s histappend
-
-# Store multiline shell commands
-shopt -s cmdhist
-
-# Allow larger .bash_history file
-HISTSIZE=2000
-HISTFILESIZE=2000
-
 # Terminal Options
 ###################
 
@@ -66,6 +49,34 @@ case "${TERM}" in
     export TERM="xterm-256color"
     ;;
 esac
+
+# History Options
+##################
+
+# Don't put duplicate lines in the history and clean up meaningless whitespace
+export HISTCONTROL=ignoreboth:erasedups
+
+# Ignore some controlling instructions
+export HISTIGNORE="[   ]*:&:bg:fg:exit:ll:ls*"
+
+# Apend to the history file, don't overwrite it
+shopt -s histappend
+
+# Store multiline shell commands
+shopt -s cmdhist
+
+# Allow larger .bash_history file
+export HISTSIZE=2000
+export HISTFILESIZE=2000
+
+# Prompt Options
+#################
+
+# Whenever displaying the prompt, write the previous line to disk
+export PROMPT_COMMAND="history -a"
+
+# Number of trailing directories component when expanding the prompt
+export PROMPT_DIRTRIM=4
 
 # Enable color terminal
 case "${TERM}" in
@@ -95,22 +106,15 @@ elif [[ -f /etc/bash_completion ]]; then
   source /etc/bash_completion
 fi
 
-# Environment Options
-######################
+# Editor Options
+#################
 
 export EDITOR=vim
 export VISUAL=vim
+export GVIM_ENABLE_WAYLAND=1
 
-# Shorten paths in prompt
-PROMPT_DIRTRIM=4
-
-{{- if (contains "google" .chezmoi.homeDir) }}
-pathadd ${HOME}/hls_infra_tools/common/tools
-{{- if (contains ".goog" .chezmoi.fqdnHostname) }}
-gcertstatus --nocheck_ssh &>/dev/null || (echo "WARNING: LOAS2 certificate expired" >& 2)
-export P4DIFF=diff
-{{- end }}
-{{- end }}
+# Path Options
+###############
 
 pathadd ${HOME}/go/bin
 pathadd ${HOME}/.local/bin
