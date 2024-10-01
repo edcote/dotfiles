@@ -1,4 +1,5 @@
 {{- if (contains ".goog" .chezmoi.fqdnHostname) }}
+alias bluze=/google/bin/releases/blueprint-bluze/public/bluze
 alias code='code --disable-gpu'
 alias copybara=/google/bin/releases/copybara/public/copybara/copybara
 alias dcgen=/google/bin/releases/ganeti-sre/cli/dcgen
@@ -9,8 +10,6 @@ alias edacloud=/google/bin/releases/englab-eda/cli/edacloud
 alias tmux=tmx2
 alias verilog-format=/google/bin/releases/platforms-ci2-verible/verible-verilog-format
 alias verilog-lint=/google/bin/releases/platforms-ci2-verible/verible-verilog-lint
-{{- else if (contains "redondo" .chezmoi.fqdnHostname) }}
-alias tmux="${HOME}/miniconda3/bin/tmux"
 {{- end }}
 alias killchrome='killall -s SIGKILL chrome'
 
