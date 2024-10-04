@@ -116,6 +116,9 @@ export GVIM_ENABLE_WAYLAND=1
 # Path Options
 ###############
 
-pathadd ${HOME}/go/bin
-pathadd ${HOME}/.local/bin
-pathadd ${HOME}/bin
+{{- if (contains "google" .chezmoi.homeDir) }}
+pathadd "${HOME}/hls_infra_tools/common/tools"
+{{- end }}
+pathadd "${HOME}/go/bin"
+pathadd "${HOME}/.local/bin"
+pathadd "${HOME}/bin"
