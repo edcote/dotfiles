@@ -18,10 +18,11 @@
     "key": "ctrl+pagedown",
     "command": "-workbench.action.nextEditorInGroup"
   },
-  // Unmap ctrl+e from quick open action
+  // Allow ctrl+e to move to end of line in terminal
   {
     "key": "ctrl+e",
     "command": "-workbench.action.quickOpen",
+    "when": "terminalFocus"
   },
   // Clipboard
   {
@@ -33,6 +34,14 @@
     "key": "ctrl+shift+c",
     "command": "editor.action.clipboardCopyAction",
     "when": "!terminalFocus"
+  },
+  // Toggle between terminal and editor focus
+  { "key": "ctrl+`",
+    "command": "workbench.action.terminal.focus"
+  },
+  { "key": "ctrl+`",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
   }
 ]
 
