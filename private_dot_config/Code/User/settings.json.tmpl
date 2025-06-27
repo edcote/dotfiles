@@ -17,43 +17,22 @@
 {{- end }}
   "bazel.buildifierFixOnFormat": true,
 
-  // ms-python.python
+ "python.testing.unittestEnabled": true,
+
+  // Editor
 {{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
-  "python.formatting.provider": "yapf",
-  "python.formatting.yapfPath": "/usr/bin/pyformat",
-  "python.formatting.yapfArgs": [],
-{{- else if (contains "google" .chezmoi.homeDir) }}
-  "python.formatting.provider": "yapf",
-  "python.formatting.yapfPath": "/google/gchips/tools/google/pyformat/20211229/pyformat",
-  "python.formatting.yapfArgs": [],
+  "editor.defaultFormatter": "google.g3",
 {{- else  }}
-  "python.formatting.provider": "yapf",
-  "python.formatting.yapfPath": "yapf",
-  "python.formatting.yapfArgs": [],
-{{- end }}
-  "python.testing.unittestEnabled": true,
-
-  // eirikpre.systemverilog https://github.com/eirikpre/VSCode-SystemVerilog
-  "systemverilog.compilerType": "Verible",
-{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
-  "systemverilog.disableIndexing": false,
-  "systemverilog.formatCommand": "/google/bin/releases/platforms-ci2-verible/verible-verilog-format",
-  "systemverilog.launchConfigurationVerible": "/google/bin/releases/platforms-ci2-verible/verible-verilog-lint",
-{{- else  }}
-  "systemverilog.disableIndexing": false,
-  "systemverilog.formatCommand": "verible-verilog-format",
-  "systemverilog.launchConfigurationVerible": "verible-verilog-format",
-{{- end }}
-
-  // Try again when this is fixed: https://github.com/chipsalliance/verible/issues/1363
-{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
-  // "verible.path": "/google/bin/releases/platforms-ci2-verible/verible-verilog-ls",
-{{- end }}
-
-  // editor
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+{{- end }}
+  "editor.tabSize": 2,
+  "editor.useTabStops": false,
+  "editor.renderWhitespace": "trailing",
+  "editor.fontFamily": "'Inconsolata', 'Droid Sans Mono', monospace",
+  "editor.minimap.enabled": false,
   "[python]": {
-    "editor.defaultFormatter": "ms-python.python"
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
   },
   "[go]": {
     "editor.defaultFormatter": "golang.go"
@@ -61,55 +40,38 @@
   "[cpp]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
+  "[verilog]": {
+    "editor.defaultFormatter": "chipsalliance.verible"
+  },
   "[systemverilog]": {
-    // "editor.defaultFormatter": "chipsalliance.verible",
-    "editor.defaultFormatter": "eirikpre.systemverilog",
-    "editor.quickSuggestions": {
-      "comments": "off",
-      "strings": "off",
-      "other": "off"
-    },
-    "editor.formatOnType": false
+    "editor.defaultFormatter": "chipsalliance.verible"
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml"
-  },
-  "editor.tabSize": 2,
-  "editor.useTabStops": false,
-  "editor.renderWhitespace": "trailing",
-  "editor.fontFamily": "'Inconsolata', 'Droid Sans Mono', monospace",
-  "editor.fontLigature": false,
-  "editor.minimap.enabled": false,
-
-  "extensions.autoUpdate": "onlySelectedExtensions",
 
   "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  "files.associations": {
-    "*.svp": "systemverilog",
-  },
 
   "output.smartScroll.enabled": false,
 
   "security.workspace.trust.untrustedFiles": "open",
 
   "telemetry.telemetryLevel": "off",
+
   "terminal.integrated.allowChords": false,
   "terminal.integrated.commandsToSkipShell": [
     "-workbench.action.quickOpen" // Allow Ctrl-P to reach the shell
   ],
 
-  "workbench.colorTheme": "Visual Studio Dark",
-  "workbench.editor.enablePreview": false,
-  "workbench.enableExperiments": false,
-  "workbench.settings.enableNaturalLanguageSearch": false,
-  "workbench.startupEditor": "none",
-  "workbench.view.alwaysShowHeaderActions": true,
+  // chipsalliance.verible
+{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
+  "verible.path": "verible-verilog-ls",
+{{- else  }}
+  "verible.path": "/home/edc/bin/verible-verilog-ls",
+{{- end }}
 
   // vscodevim.vim
   "vim.autoindent": false,
@@ -150,7 +112,10 @@
     "<G>": true
   },
 
-  // redhat.vscode-xml
-  "redhat.telemetry.enabled": false,
-  "xml.format.splitAttributes": true,
+  "workbench.colorTheme": "Visual Studio Dark",
+  "workbench.editor.enablePreview": false,
+  "workbench.enableExperiments": false,
+  "workbench.settings.enableNaturalLanguageSearch": false,
+  "workbench.startupEditor": "none",
+  "workbench.view.alwaysShowHeaderActions": true,
 }
