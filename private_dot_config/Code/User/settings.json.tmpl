@@ -11,13 +11,17 @@
 {{- if (contains "google" .chezmoi.homeDir) }}
   "bazel.executable": "/usr/local/google/home/ecote/go/bin/bazelisk",
   "bazel.buildifierExecutable": "/usr/local/google/home/ecote/go/bin/buildifier",
+{{- else if eq .chezmoi.hostname "arthur" }}
+  "bazel.executable": "/home/edc/miniconda3/envs/execspec/bin/bazel",
+  "bazel.buildifierExecutable": "/home/edc/miniconda3/envs/execspec/bin/buildifier",
 {{- else }}
-  "bazel.executable": "/home/edc/go/bin/bazelisk",
-  "bazel.buildifierExecutable": "/home/edc/go/bin/buildifier",
+  "bazel.executable": "bazel",
+  "bazel.buildifierExecutable": "buildifier",
 {{- end }}
   "bazel.buildifierFixOnFormat": true,
 
- "python.testing.unittestEnabled": true,
+  // Python
+  "python.testing.unittestEnabled": true,
 
   // Editor
 {{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
@@ -28,7 +32,7 @@
   "editor.tabSize": 2,
   "editor.useTabStops": false,
   "editor.renderWhitespace": "trailing",
-  "editor.fontFamily": "'Inconsolata', 'Droid Sans Mono', monospace",
+  "editor.fontFamily": "Inconsolata, Consolas, 'Droid Sans Mono', monospace",
   "editor.minimap.enabled": false,
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
@@ -40,15 +44,21 @@
   "[cpp]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
-  "[verilog]": {
-    "editor.defaultFormatter": "chipsalliance.verible"
-  },
-  "[systemverilog]": {
-    "editor.defaultFormatter": "chipsalliance.verible"
-  },
+  // TODO: ecote - Find replacement for verible.
+  //  "[verilog]": {
+  //    "editor.defaultFormatter": "chipsalliance.verible"
+  //  },
+  //  "[systemverilog]": {
+  //    "editor.defaultFormatter": "chipsalliance.verible"
+  //  },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+{{- if not (contains "corp.google.com" .chezmoi.fqdnHostname) }}
+  "[starlark]": {
+    "editor.defaultFormatter": "BazelBuild.vscode-bazel"
+  },
+{{- end }}
 
   "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
@@ -65,13 +75,6 @@
   "terminal.integrated.commandsToSkipShell": [
     "-workbench.action.quickOpen" // Allow Ctrl-P to reach the shell
   ],
-
-  // chipsalliance.verible
-{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
-  "verible.path": "verible-verilog-ls",
-{{- else  }}
-  "verible.path": "/home/edc/bin/verible-verilog-ls",
-{{- end }}
 
   // vscodevim.vim
   "vim.autoindent": false,
