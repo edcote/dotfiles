@@ -25,15 +25,9 @@
 
   // Editor
 {{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
-  "editor.defaultFormatter": "google.g3",
+  "editor.defaultFormatter": "google.lsp",
 {{- else  }}
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-{{- end }}
-  "editor.tabSize": 2,
-  "editor.useTabStops": false,
-  "editor.renderWhitespace": "trailing",
-  "editor.fontFamily": "Inconsolata, Consolas, 'Droid Sans Mono', monospace",
-  "editor.minimap.enabled": false,
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true
@@ -54,12 +48,15 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-{{- if not (contains "corp.google.com" .chezmoi.fqdnHostname) }}
   "[starlark]": {
     "editor.defaultFormatter": "BazelBuild.vscode-bazel"
   },
 {{- end }}
-
+  "editor.tabSize": 2,
+  "editor.useTabStops": false,
+  "editor.renderWhitespace": "trailing",
+  "editor.fontFamily": "Inconsolata, Consolas, 'Droid Sans Mono', monospace",
+  "editor.minimap.enabled": false,
   "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
