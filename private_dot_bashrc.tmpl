@@ -92,12 +92,10 @@ fi
 unset color_prompt
 
 # Enable bash-git-prompt
-{{- if not (contains "whi" .chezmoi.fqdnHostname) }}
 GIT_PROMPT_ONLY_IN_REPO=1
 GIT_PROMPT_THEME=Single_line_Minimalist_Ascii
 GIT_PROMPT_SHOW_UNTRACKED_FILES=no
 source "${HOME}/.bash_git_prompt/gitprompt.sh"
-{{- end }}
 
 # Enable programmable completion features
 if [[ -f /usr/share/bash-completion/bash_completion ]]; then
@@ -116,9 +114,6 @@ export GVIM_ENABLE_WAYLAND=1
 # Path Options
 ###############
 
-{{- if (contains "google" .chezmoi.homeDir) }}
-pathadd "${HOME}/hls_infra_tools/common/tools"
-{{- end }}
 pathadd "${HOME}/go/bin"
 pathadd "${HOME}/.local/bin"
 pathadd "${HOME}/bin"
