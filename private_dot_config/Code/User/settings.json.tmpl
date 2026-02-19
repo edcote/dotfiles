@@ -38,7 +38,7 @@
   "[cpp]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
-  // TODO: ecote - Find replacement for verible.
+  "clang-format.executable": "${workspaceRoot}/conda/bin/clang-format",
   //  "[verilog]": {
   //    "editor.defaultFormatter": "chipsalliance.verible"
   //  },
@@ -118,4 +118,9 @@
   "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.startupEditor": "none",
   "workbench.view.alwaysShowHeaderActions": true,
+
+  // Configure extensions to run in own host process for performance
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  }
 }
