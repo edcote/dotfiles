@@ -27,7 +27,6 @@
 {{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
   "editor.defaultFormatter": "google.lsp",
 {{- else  }}
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true
@@ -38,19 +37,28 @@
   "[cpp]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
-  "clang-format.executable": "${workspaceRoot}/conda/bin/clang-format",
-  //  "[verilog]": {
-  //    "editor.defaultFormatter": "chipsalliance.verible"
-  //  },
-  //  "[systemverilog]": {
-  //    "editor.defaultFormatter": "chipsalliance.verible"
-  //  },
+  "[verilog]": {
+    "editor.defaultFormatter": "edmond-cote.only-verible-verilog-format"
+  },
+  "[systemverilog]": {
+    "editor.defaultFormatter": "edmond-cote.only-verible-verilog-format"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[starlark]": {
     "editor.defaultFormatter": "BazelBuild.vscode-bazel"
   },
+  // xaver.clang-format
+  "clang-format.executable": "${workspaceRoot}/conda/bin/clang-format",
+  // edmond-cote.only-verible-verilog-format
+  "only-verible-verilog-format.executablePath": "${workspaceRoot}/verible-verilog-format",
 {{- end }}
   "editor.tabSize": 2,
   "editor.useTabStops": false,
