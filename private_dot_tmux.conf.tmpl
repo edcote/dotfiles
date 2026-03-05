@@ -55,10 +55,13 @@ bind -n C-S-Down select-pane -D
 bind -n M-Left previous-window
 bind -n M-Right next-window
 
-# GOTCHA: Don't forget to install plugins using C-b I
+# Don't forget to clone plugin manager (tpm) manually:
+# `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
+# Also. don't forget to install plugins using `C-b I`
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
+
 set -g @continuum-restore 'on'
 
 run-shell '~/.tmux/plugins/tpm/tpm'
