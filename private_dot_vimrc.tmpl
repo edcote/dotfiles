@@ -46,15 +46,21 @@ set nocursorline
 set novisualbell
 set ruler
 set number
+set relativenumber
 set laststatus=2
 set nowrap
 set backspace=indent,eol,start
 let g:loaded_matchparen=1
+set wildmenu
+set splitright
+set splitbelow
 
 " Search options
 set ignorecase
+set smartcase
 set hlsearch
 set incsearch
+set gdefault
 
 " Key mappings
 if &term == "screen-256color"
@@ -67,8 +73,15 @@ noremap <C-n> :bnext<CR>
 noremap <C-m> :wnext<CR>
 noremap <C-p> :bprev<CR>
 
+" Use the system clipboard as default register
+set clipboard=unnamedplus
+
 " Save files when window loses focus
 autocmd FocusLost * silent! wa
 
-" Use the system clipboard as default register
-set clipboard=unnamedplus
+" Persistent Undo
+if has('undofile')
+  silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+  set undofile
+  set undodir=~/.vim/undo
+endif

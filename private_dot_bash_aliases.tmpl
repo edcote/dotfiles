@@ -9,7 +9,6 @@ alias include-cleaner=/google/bin/releases/lpt-c-tools/include-cleaner/include_c
 alias jetski=/google/bin/releases/jetski-devs/tools/cli
 alias mdformat=/google/data/ro/teams/g3doc/mdformat
 alias pastebin=/google/src/head/depot/eng/tools/pastebin
-alias ralph='/google/bin/releases/ralph-team/ralph'
 alias tmux=tmx2
 alias verilog-format=/google/bin/releases/platforms-ci2-verible/verible-verilog-format
 alias verilog-lint=/google/bin/releases/platforms-ci2-verible/verible-verilog-lint
@@ -52,11 +51,10 @@ alias lt='ls --human-readable --size -1 -S --classify'
 
 alias gl='git log --pretty=format:"%h%x09%an%x09%ad%x09%s" --date=short'
 
-# Removes directory from stack and print
 alias o='popd -n && dirs -v'
-
-# Displays directory stack
 alias dirs='dirs -v'
-
-# Clears directory stack
 alias popa='dirs -c'
+
+alias ta='tmux attach -t'
+alias tl='tmux list-sessions'
+alias ts='tmux new-session -s'
