@@ -4,15 +4,16 @@
 
 set -g base-index 1
 set -g pane-base-index 1
-
-# Renumber windows sequentially after closing any of them
 set -g renumber-windows on
-
-set -g history-limit 100000
 
 set -g allow-rename off
 
+set -g history-limit 100000
+
 set -g mouse on
+
+# Allow double-clicking to select whole paths
+set -g word-separators " @=()[]:\"'"
 
 # ---------------------------------------------------------------------
 # Terminal Settings
@@ -33,12 +34,13 @@ set -g focus-events on
 
 set-window-option -g mode-keys vi
 
-
 # ---------------------------------------------------------------------
 # Status Bar
 # ---------------------------------------------------------------------
 
-set -g status-left-length 200
+set -g status-left-length 20
+set -g status-left "[#S] "
+set -g status-right ""
 
 # Different colors for different hostnames
 {{- if (contains "arthur" .chezmoi.fqdnHostname) }}
