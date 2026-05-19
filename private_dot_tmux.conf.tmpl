@@ -40,7 +40,13 @@ set-window-option -g mode-keys vi
 
 set -g status-left-length 20
 set -g status-left "[#S] "
+{{- if (contains "google" .chezmoi.homeDir) }}
+set -g status-right "#{?@jetski_alert,#[fg=red,bold][#{@jetski_alert}] ,}"
+# Clear Jetski alert on window selection
+set-hook -g after-select-window 'run-shell "tmux set-option -u @jetski_alert"'
+{{- else }}
 set -g status-right ""
+{{- end }}
 
 # Different colors for different hostnames
 {{- if (contains "arthur" .chezmoi.fqdnHostname) }}
@@ -97,7 +103,6 @@ bind -r J resize-pane -D 5
 bind -r K resize-pane -U 5
 bind -r L resize-pane -R 5
 
-
 # ---------------------------------------------------------------------
 # Plugins
 # ---------------------------------------------------------------------
@@ -106,9 +111,5 @@ bind -r L resize-pane -R 5
 # `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 # Also. don't forget to install plugins using `C-b I`
 set -g @plugin 'tmux-plugins/tmux-yank'
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
-
-set -g @continuum-restore 'on'
 
 run-shell '~/.tmux/plugins/tpm/tpm'

@@ -1,0 +1,22 @@
+#!/bin/sh
+# This script reloads Dash to Panel settings when dash_to_panel.ini.tmpl changes.
+# dash_to_panel.ini hash: {{ include "private_dot_config/dconf/dash_to_panel.ini.tmpl" | sha256sum }}
+
+PANEL_UUID="dash-to-panel@jderose9.github.com"
+PANEL_ENABLED=$(gnome-extensions list --enabled | grep -x "$PANEL_UUID")
+
+if [ -n "$PANEL_ENABLED" ]; then
+  echo "Temporarily disabling Dash to Panel to prevent settings overwrite..."
+  gnome-extensions disable "$PANEL_UUID"
+  sleep 1
+fi
+
+echo "Loading Dash to Panel settings..."
+dconf load -f /org/gnome/shell/extensions/dash-to-panel/ < ~/.config/dconf/dash_to_panel.ini
+dconf update /
+
+if [ -n "$PANEL_ENABLED" ]; then
+  echo "Re-enabling Dash to Panel..."
+  sleep 1
+  gnome-extensions enable "$PANEL_UUID"
+fi

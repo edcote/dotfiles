@@ -1,87 +1,48 @@
+{{- $google3 := contains "google" .chezmoi.homeDir -}}
 {
-{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
-  // Blaze
-  "blaze.ciderd.enable": true,
-  "blaze.ciderd.machineId": "wilfrid.mtv.corp.google.com",
-  "editor.defaultFormatter": "google.g3",
-  "terminal.integrated.enableCidermux": true,
-{{- end }}
-
-  // Bazel
-{{- if (contains "google" .chezmoi.homeDir) }}
-  "bazel.executable": "/usr/local/google/home/ecote/go/bin/bazelisk",
-  "bazel.buildifierExecutable": "/usr/local/google/home/ecote/go/bin/buildifier",
-{{- else if eq .chezmoi.hostname "arthur" }}
-  "bazel.executable": "/home/edc/miniconda3/envs/execspec/bin/bazel",
-  "bazel.buildifierExecutable": "/home/edc/miniconda3/envs/execspec/bin/buildifier",
-{{- else }}
-  "bazel.executable": "bazel",
-  "bazel.buildifierExecutable": "buildifier",
-{{- end }}
-  "bazel.buildifierFixOnFormat": true,
-
-  // Python
-  "python.testing.unittestEnabled": true,
-
-  // Editor
-{{- if (contains "corp.google.com" .chezmoi.fqdnHostname) }}
-  "editor.defaultFormatter": "google.lsp",
-{{- else  }}
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.formatOnSave": true
-  },
-  "[go]": {
-    "editor.defaultFormatter": "golang.go"
-  },
-  "[cpp]": {
-    "editor.defaultFormatter": "xaver.clang-format"
-  },
-  "[verilog]": {
-    "editor.defaultFormatter": "edmond-cote.only-verible-verilog-format"
-  },
-  "[systemverilog]": {
-    "editor.defaultFormatter": "edmond-cote.only-verible-verilog-format"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[starlark]": {
-    "editor.defaultFormatter": "BazelBuild.vscode-bazel"
-  },
-  // xaver.clang-format
-  "clang-format.executable": "${workspaceRoot}/conda/bin/clang-format",
-  // edmond-cote.only-verible-verilog-format
-  "only-verible-verilog-format.executablePath": "${workspaceRoot}/verible-verilog-format",
-{{- end }}
+  // ===================================================================
+  // Editor General Settings
+  // ===================================================================
   "editor.tabSize": 2,
   "editor.useTabStops": false,
   "editor.renderWhitespace": "trailing",
-  "editor.fontFamily": "Inconsolata, Consolas, 'Droid Sans Mono', monospace",
   "editor.minimap.enabled": false,
   "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
 
-  "output.smartScroll.enabled": false,
+  // ===================================================================
+  // Formatting Settings
+  // ===================================================================
+  {{- if $google3 }}
+  "editor.defaultFormatter": "google.lsp",
+  "clang-format.executable": "${workspaceRoot}/conda/bin/clang-format",
+  "only-verible-verilog-format.executablePath": "${workspaceRoot}/verible-verilog-format",
+  {{- end }}
 
-  "security.workspace.trust.untrustedFiles": "open",
+  // ===================================================================
+  // Font Settings
+  // ===================================================================
+  "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Inconsolata', 'Consolas', 'Droid Sans Mono', monospace",
+  "editor.fontSize": 14,
+  "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'Inconsolata', 'Consolas', 'Droid Sans Mono', monospace",
+  "terminal.integrated.fontSize": 14,
 
-  "telemetry.telemetryLevel": "off",
-
+  // ===================================================================
+  // Terminal General Settings
+  // ===================================================================
+  {{- if $google3 }}
+  "terminal.integrated.enableCidermux": true,
+  {{- end }}
   "terminal.integrated.allowChords": false,
   "terminal.integrated.commandsToSkipShell": [
     "-workbench.action.quickOpen" // Allow Ctrl-P to reach the shell
   ],
 
-  // vscodevim.vim
+  // ===================================================================
+  // Vim Extension Settings
+  // ===================================================================
   "vim.autoindent": false,
   "vim.cursorStylePerMode.insert": "line",
   "vim.cursorStylePerMode.normal": "block",
@@ -120,15 +81,23 @@
     "<G>": true
   },
 
+  // ===================================================================
+  // Workbench & UI Settings
+  // ===================================================================
+  {{- if $google3 }}
+  "workbench.colorTheme": "Cider Dark",
+  {{- else }}
   "workbench.colorTheme": "Visual Studio Dark",
+  {{- end }}
   "workbench.editor.enablePreview": false,
-  "workbench.enableExperiments": false,
   "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.startupEditor": "none",
   "workbench.view.alwaysShowHeaderActions": true,
 
-  // Configure extensions to run in own host process for performance
-  "extensions.experimental.affinity": {
-    "vscodevim.vim": 1
-  }
+  // ===================================================================
+  // System & Performance
+  // ===================================================================
+  "telemetry.telemetryLevel": "off",
+  "output.smartScroll.enabled": false,
+  "security.workspace.trust.untrustedFiles": "open"
 }
