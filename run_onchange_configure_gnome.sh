@@ -9,12 +9,14 @@ echo "Configuring GNOME focus-mode and custom shortcuts..."
 # ---------------------------------------------------------------------
 # Set Focus Follows Mouse
 gsettings set org.gnome.desktop.wm.preferences focus-mode 'sloppy'
+gsettings set org.gnome.desktop.wm.preferences auto-raise true
+gsettings set org.gnome.desktop.wm.preferences auto-raise-delay 500
 
-# Direct Switching to avoid Wayland MRU bug
-gsettings set org.gnome.desktop.wm.keybindings switch-windows "[]"
-gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "[]"
-gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Alt>Tab']"
-gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "['<Shift><Alt>Tab']"
+# Use standard window switcher (raises windows on Alt release)
+gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Shift><Alt>Tab']"
+gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Alt>Escape']"
+gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "['<Shift><Alt>Escape']"
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # ---------------------------------------------------------------------
