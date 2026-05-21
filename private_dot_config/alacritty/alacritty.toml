@@ -10,3 +10,11 @@ normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 
 [env]
 TERM = "xterm-256color"
+
+[[hints.enabled]]
+regex = '(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\S+'
+hyperlinks = true
+command = "google-chrome"
+post_processing = true
+mouse = { enabled = true, mods = "Control" }
+binding = { key = "U", mods = "Control|Shift" }
