@@ -1,0 +1,4 @@
+#!/bin/bash
+# Wrapper to run GVim with Wayland enabled.
+export GVIM_ENABLE_WAYLAND=1
+exec gvim "$@"

@@ -1,0 +1,15 @@
+#!/bin/bash
+# Wrapper to run Chrome with Wayland and GPU acceleration flags for optimal latency.
+#
+# Flags used:
+# --ozone-platform-hint=wayland: Run natively on Wayland (avoids XWayland emulation overhead)
+# --enable-gpu-rasterization: Offload rasterization to the GPU to free up CPU and reduce input lag
+# --enable-oop-rasterization: Run rasterization out-of-process to prevent rendering from blocking the browser UI
+# --enable-features=CanvasOopRasterization: Accelerate 2D canvas rendering on the GPU
+
+exec /opt/google/chrome/google-chrome \
+  --ozone-platform-hint=wayland \
+  --enable-gpu-rasterization \
+  --enable-oop-rasterization \
+  --enable-features=CanvasOopRasterization \
+  "$@"
