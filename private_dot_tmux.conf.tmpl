@@ -19,8 +19,10 @@ set -g word-separators " @=()[]:\"'"
 # Terminal Settings
 # ---------------------------------------------------------------------
 
-set -g default-terminal "screen-256color"
-set -ga terminal-overrides ",*256col*:Tc"
+set -g default-terminal "tmux-256color"
+# Enable RGB (true color) and hyperlinks (OSC 8) for Alacritty
+set -as terminal-features ",xterm-256color:RGB:hyperlinks,alacritty:RGB:hyperlinks"
+set -s set-clipboard on
 
 # ---------------------------------------------------------------------
 # Vim Friendliness
