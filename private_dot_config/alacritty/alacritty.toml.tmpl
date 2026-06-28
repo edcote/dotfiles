@@ -1,11 +1,14 @@
 [window]
-padding = { x = 3, y = 3 }
 opacity = 1.0
 decorations = "Full"
 dynamic_title = false
 
 [font]
+{{- if (contains "arthur" .chezmoi.fqdnHostname) }}
+size = 11.0
+{{- else }}
 size = 14.0
+{{- end }}
 normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 
 [env]
@@ -15,7 +18,7 @@ TERM = "xterm-256color"
 save_to_clipboard = true
 
 [[hints.enabled]]
-regex = '(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\S+'
+regex = '(ipfs:|ipns:|magnet:|mailto:|gemini:|https:|http:|file:|git:|ssh:|ftp:)\S+'
 hyperlinks = true
 command = "google-chrome"
 post_processing = true

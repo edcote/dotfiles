@@ -26,6 +26,11 @@ gsettings set org.gnome.desktop.peripherals.keyboard delay 250
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 
 # ---------------------------------------------------------------------
+# Sound Settings
+# ---------------------------------------------------------------------
+gsettings set org.gnome.desktop.sound event-sounds false
+
+# ---------------------------------------------------------------------
 # Configure Custom Keybindings
 # ---------------------------------------------------------------------
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[ \
@@ -57,10 +62,12 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ command 'alacritty -e python3'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ binding '<Super>c'
 
+{{- if (contains "google" .chezmoi.homeDir) }}
 # custom4: Cider-V
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name 'Cider-V'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ command "$HOME/.local/bin/chrome_wayland --app=https://cider-v.corp.google.com/?ws=__prompt"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ binding '<Super>v'
+{{- end }}
 
 # custom5: Run in Terminal
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/ name 'Run in Terminal'
@@ -70,9 +77,11 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 # Reset default GNOME run dialog keybinding to Alt+F2 to avoid conflict with Super+r
 gsettings set org.gnome.desktop.wm.keybindings panel-run-dialog "['<Alt>F2']"
 
+# Disable default GNOME keybinding to avoid conflict with custom keybindings
+gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "@as []"
+gsettings set org.gnome.settings-daemon.plugins.media-keys www "@as []"
+
 # ---------------------------------------------------------------------
 # Shell Extensions
 # ---------------------------------------------------------------------
-gnome-extensions enable window-calls@domandoman.xyz
-
-echo "GNOME configuration applied."
+gnome-extensions enable window-calls@domandoman.xyz || true

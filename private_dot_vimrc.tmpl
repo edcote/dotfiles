@@ -14,7 +14,11 @@ try
 endtry
 
 if has("gui_running")
+{{- if (contains "arthur" .chezmoi.fqdnHostname) }}
+  set guifont=JetBrainsMono\ Nerd\ Font\ 11
+{{- else }}
   set guifont=JetBrainsMono\ Nerd\ Font\ 14
+{{- end }}
 endif
 
 " Whitespace
