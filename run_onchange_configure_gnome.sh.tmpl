@@ -7,10 +7,10 @@ echo "Configuring GNOME focus-mode and custom shortcuts..."
 # ---------------------------------------------------------------------
 # Window Manager Preferences
 # ---------------------------------------------------------------------
-# Set Focus Follows Mouse
-gsettings set org.gnome.desktop.wm.preferences focus-mode 'sloppy'
-gsettings set org.gnome.desktop.wm.preferences auto-raise true
-gsettings set org.gnome.desktop.wm.preferences auto-raise-delay 500
+# Set Click to Focus (standard GNOME default)
+gsettings set org.gnome.desktop.wm.preferences focus-mode 'click'
+gsettings set org.gnome.desktop.wm.preferences auto-raise false
+gsettings reset org.gnome.desktop.wm.preferences auto-raise-delay
 
 # Use standard window switcher (raises windows on Alt release)
 gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"
