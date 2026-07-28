@@ -10,6 +10,7 @@ echo "Configuring GNOME focus-mode and custom shortcuts..."
 # Set Click to Focus (standard GNOME default)
 gsettings set org.gnome.desktop.wm.preferences focus-mode 'click'
 gsettings set org.gnome.desktop.wm.preferences auto-raise false
+gsettings set org.gnome.desktop.wm.preferences focus-new-windows 'strict'
 gsettings reset org.gnome.desktop.wm.preferences auto-raise-delay
 
 # Use standard window switcher (raises windows on Alt release)
