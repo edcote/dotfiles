@@ -21,6 +21,15 @@ gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "['<Shift>
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # ---------------------------------------------------------------------
+# Virtual Desktops
+# ---------------------------------------------------------------------
+# Fixed set of 4 desktops; ~/bin/setup_workspaces places the coding windows
+# (tmux/Alacritty + Cider-J) on desktop 2 after a reboot.
+gsettings set org.gnome.mutter dynamic-workspaces false
+gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
+gsettings set org.gnome.desktop.wm.preferences workspace-names "['MAIN', 'CODE', '3', '4']"
+
+# ---------------------------------------------------------------------
 # Keyboard / Input Settings
 # ---------------------------------------------------------------------
 gsettings set org.gnome.desktop.peripherals.keyboard delay 250
@@ -64,9 +73,9 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ binding '<Super>c'
 
 {{- if (contains "google" .chezmoi.homeDir) }}
-# custom4: Cider-V
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name 'Cider-V'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ command "$HOME/.local/bin/chrome_wayland --app=https://cider-v.corp.google.com/?ws=__prompt"
+# custom4: Cider-J
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name 'Cider-J'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ command "$HOME/.local/bin/chrome_wayland --app=https://cider-j.corp.google.com/?ws=__prompt"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ binding '<Super>v'
 {{- end }}
 

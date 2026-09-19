@@ -1,0 +1,159 @@
+#!/usr/bin/env python3
+"""Re-create the development desktop after a reboot.
+
+Launches one tmux session (in Alacritty) and one Cider-J window for the jj
+workspace `main`, then moves both windows to GNOME desktop 2 using the
+'Window Calls' GNOME extension D-Bus API.
+
+Static GNOME configuration (number/names of desktops) is managed by chezmoi in
+run_onchange_configure_gnome.sh.tmpl, not here.
+"""
+
+import ast
+import getpass
+import json
+import os
+import subprocess
+import sys
+import time
+
+# Configuration
+USER = getpass.getuser()
+WORKSPACE = "main"
+WORKSPACE_DIR = f"/google/src/cloud/{USER}/{WORKSPACE}/google3"
+TMUX_SESSION = WORKSPACE.upper()
+ALACRITTY_TITLE = f"Alacritty - {WORKSPACE}"
+CIDER_URL = f"https://cider-j.corp.google.com/?ws={USER}/{WORKSPACE}"
+# 0-based index of the GNOME desktop that hosts the coding windows.
+TARGET_DESKTOP_INDEX = 1
+PLACEMENT_TIMEOUT_S = 20
+
+
+def run_cmd(cmd, check=True):
+  """Run a shell command and return its stripped stdout."""
+  try:
+    result = subprocess.run(
+        cmd, shell=True, check=check, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+    )
+    return result.stdout.strip()
+  except subprocess.CalledProcessError as e:
+    print(f"Command failed: {cmd}\nError: {e.stderr}")
+    raise
+
+
+def launch_detached(cmd):
+  """Start a GUI app in its own session so it outlives the launching shell."""
+  subprocess.Popen(cmd, shell=True, start_new_session=True)
+
+
+def list_windows():
+  """List windows via Window Calls D-Bus API."""
+  cmd = (
+      "gdbus call --session --dest org.gnome.Shell "
+      "--object-path /org/gnome/Shell/Extensions/Windows "
+      "--method org.gnome.Shell.Extensions.Windows.List"
+  )
+  try:
+    output = run_cmd(cmd)
+    # gdbus prints a Python-like tuple whose first element is a JSON string.
+    parsed_tuple = ast.literal_eval(output)
+    return json.loads(parsed_tuple[0])
+  except Exception as e:
+    print(f"Error listing windows (is Window Calls extension running?): {e}")
+    return []
+
+
+def move_window_to_workspace(win_id, workspace_index):
+  """Move window to GNOME desktop index (0-based) via D-Bus."""
+  cmd = (
+      f"gdbus call --session --dest org.gnome.Shell "
+      f"--object-path /org/gnome/Shell/Extensions/Windows "
+      f"--method org.gnome.Shell.Extensions.Windows.MoveToWorkspace "
+      f"{win_id} {workspace_index}"
+  )
+  run_cmd(cmd)
+
+
+def is_alacritty_window(win):
+  return win.get("wm_class", "") == "Alacritty" and win.get("title", "") == ALACRITTY_TITLE
+
+
+def is_cider_window(win):
+  wm_class = win.get("wm_class", "") or ""
+  title = win.get("title", "") or ""
+  is_chrome_or_cider = "chrome" in wm_class.lower() or "cider" in wm_class.lower()
+  return is_chrome_or_cider and "cider" in title.lower() and WORKSPACE.lower() in title.lower()
+
+
+def setup_tmux_session():
+  """Create the tmux session rooted at the workspace if it does not exist."""
+  has_session = subprocess.run(
+      f"tmux has-session -t '{TMUX_SESSION}' 2>/dev/null", shell=True
+  ).returncode == 0
+  if not has_session:
+    print(f"Creating tmux session: {TMUX_SESSION}")
+    run_cmd(f"tmux new-session -d -s '{TMUX_SESSION}' -c '{WORKSPACE_DIR}'")
+
+
+def launch_alacritty(windows):
+  if any(is_alacritty_window(w) for w in windows):
+    print(f"Alacritty for {WORKSPACE} already running (window detected).")
+    return
+  print(f"Launching Alacritty for {WORKSPACE}...")
+  launch_detached(
+      f"alacritty -T '{ALACRITTY_TITLE}' -e tmux attach-session -t '{TMUX_SESSION}'"
+  )
+
+
+def launch_cider(windows):
+  if any(is_cider_window(w) for w in windows):
+    print(f"Cider-J for {WORKSPACE} already running (window detected).")
+    return
+  print(f"Launching Cider-J for {WORKSPACE}...")
+  launch_detached(f"chrome_wayland --profile-directory='Profile 1' --app='{CIDER_URL}'")
+
+
+def place_windows():
+  """Poll the window list and move Alacritty + Cider to the target desktop."""
+  pending = {"alacritty": is_alacritty_window, "cider": is_cider_window}
+  print(f"\nMoving windows to desktop {TARGET_DESKTOP_INDEX + 1}...")
+  start_time = time.time()
+
+  while time.time() - start_time < PLACEMENT_TIMEOUT_S:
+    if not pending:
+      print("All windows successfully placed.")
+      return
+
+    windows = list_windows()
+    if not windows:
+      # D-Bus call failed; bail out instead of spinning until timeout.
+      return
+
+    for win in windows:
+      for name, matcher in list(pending.items()):
+        if matcher(win):
+          print(f"-> Moving {name} window to desktop {TARGET_DESKTOP_INDEX + 1}")
+          move_window_to_workspace(win.get("id"), TARGET_DESKTOP_INDEX)
+          del pending[name]
+
+    time.sleep(0.1)
+
+  print(f"Timeout reached. Not placed: {', '.join(pending)}")
+
+
+def main():
+  if not os.path.isdir(WORKSPACE_DIR):
+    sys.exit(
+        f"Workspace directory not found: {WORKSPACE_DIR}\n"
+        f"Create the jj/CitC workspace '{WORKSPACE}' first."
+    )
+
+  setup_tmux_session()
+  windows = list_windows()
+  launch_alacritty(windows)
+  launch_cider(windows)
+  place_windows()
+
+
+if __name__ == "__main__":
+  main()

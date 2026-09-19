@@ -1,0 +1,12 @@
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
+# Config overrides for CitC (go/jj-tips-and-tricks#citc-specific-config)
+
+--when.repositories = ["/google/src/cloud/"]
+
+[snapshot]
+auto-update-stale = true
+
+[aliases]
+p4sync = ["piper", "sync", "-b", "p4base+"]
+pending-cl = ["util", "exec", "--", "bash", "/google/src/head/depot/google3/devtools/jj/contrib/closest_pending_cl.sh"]
+diff-cl = ["util", "exec", "--", "bash", "/google/src/head/depot/google3/devtools/jj/contrib/interdiff_cl.sh"]

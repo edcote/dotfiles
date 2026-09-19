@@ -29,6 +29,18 @@ g4cleansync() {
   fi
 }
 
+jjcleansync() {
+  if ! [[ -d ${PWD%/google3*}/.jj ]]; then
+    echo "ERROR: Not in jj client" >&2
+    return 1
+  fi
+  jj status
+  if confirm; then
+    jj restore
+    jj p4sync
+  fi
+}
+
 hgcleansync() {
   if ! grep -s -q fig ${PWD%/google3*}/.hg/requires; then
     echo "ERROR: Not in fig client" >&2
