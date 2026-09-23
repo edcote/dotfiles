@@ -52,8 +52,8 @@ set -g status-right ""
 
 # Different colors for different hostnames
 {{- if (contains "arthur" .chezmoi.fqdnHostname) }}
-set -g status-bg DarkGreen
-set -g status-fg color251
+set -g status-bg "#4CAF50"
+set -g status-fg "#FFFFFF"
 {{- else if (contains "wilfrid" .chezmoi.fqdnHostname) }}
 set -g status-bg Gold
 set -g status-fg Black

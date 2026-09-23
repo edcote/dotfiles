@@ -117,3 +117,6 @@ export GVIM_ENABLE_WAYLAND=1
 pathadd "${HOME}/.local/bin"
 pathadd "${HOME}/bin"
 pathadd "/usr/local/bin"
+{{- if (contains "arthur" .chezmoi.fqdnHostname) }}
+pathadd "${HOME}/miniconda3/bin"
+{{- end }}
