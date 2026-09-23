@@ -38,3 +38,10 @@
 	amend = commit --amend --no-edit
 	reword = commit --amend
 	upload = "!git push $(git remote -v | head -1 | awk '{print $1}') HEAD:refs/for/$(git rev-parse --abbrev-ref HEAD)"
+{{- if not (contains "google" .chezmoi.homeDir) }}
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+{{- end }}
