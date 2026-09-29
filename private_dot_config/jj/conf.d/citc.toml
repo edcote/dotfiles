@@ -7,6 +7,7 @@
 auto-update-stale = true
 
 [aliases]
+lw = ["log", "-r", "main..@"]
 p4sync = ["piper", "sync", "-b", "p4base+"]
 pending-cl = ["util", "exec", "--", "bash", "/google/src/head/depot/google3/devtools/jj/contrib/closest_pending_cl.sh"]
 diff-cl = ["util", "exec", "--", "bash", "/google/src/head/depot/google3/devtools/jj/contrib/interdiff_cl.sh"]
