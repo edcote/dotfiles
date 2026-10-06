@@ -8,6 +8,8 @@ dynamic_title = false
 [font]
 {{- if (contains "arthur" .chezmoi.fqdnHostname) }}
 size = 11.0
+{{- else if (contains "wilfrid" .chezmoi.fqdnHostname) }}
+size = 11.0
 {{- else }}
 size = 14.0
 {{- end }}
