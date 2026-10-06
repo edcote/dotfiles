@@ -88,8 +88,11 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.desktop.wm.keybindings panel-run-dialog "['<Alt>F2']"
 
 # Disable default GNOME keybinding to avoid conflict with custom keybindings
-gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "@as []"
-gsettings set org.gnome.settings-daemon.plugins.media-keys www "@as []"
+gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "@as []" 2>/dev/null || true
+gsettings set org.gnome.settings-daemon.plugins.media-keys www "@as []" 2>/dev/null || true
+gsettings set org.gnome.shell.extensions.dash-to-panel intellihide-key-toggle-text '' 2>/dev/null || true
+gsettings set org.gnome.shell.extensions.dash-to-panel intellihide-key-toggle "@as []" 2>/dev/null || true
+
 
 # ---------------------------------------------------------------------
 # Shell Extensions
