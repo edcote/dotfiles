@@ -2,3 +2,9 @@
     type = "git-repo"
     url = "https://github.com/tmux-plugins/tpm"
     refreshPeriod = "8h"
+
+[".local/share/fonts/JetBrainsMono"]
+    type = "archive"
+    url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz"
+    include = ["*.ttf"]
+    refreshPeriod = "168h"
