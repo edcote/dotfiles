@@ -105,6 +105,36 @@ bgrm() {
 ssh-agent-add() {
   local key=$1
   [[ -n ${key} ]] || key=${HOME}/.ssh/my_very_secure_key
+
+  # Resolve path relative to ~/.ssh if not found in current directory
+  if [[ ! -f "${key}" && -f "${HOME}/.ssh/${key}" ]]; then
+    key="${HOME}/.ssh/${key}"
+  fi
+
+  if [[ ! -f "${key}" ]]; then
+    echo "ERROR: Key file not found: ${key}" >&2
+    return 1
+  fi
+
+  # Ensure agent is running
+  if ! ssh-agent-alive; then
+    ssh-agent-start || return 1
+  fi
+
+  # Check if key is already added to avoid redundant passphrase prompts
+  local fp pubkey
+  pubkey="${key}.pub"
+  if [[ -f "${pubkey}" ]]; then
+    fp=$(ssh-keygen -l -f "${pubkey}" 2>/dev/null | awk '{print $2}')
+  else
+    fp=$(ssh-keygen -l -f "${key}" 2>/dev/null | awk '{print $2}')
+  fi
+
+  if [[ -n "${fp}" ]] && ssh-add -l 2>/dev/null | grep -q "${fp}"; then
+    echo "Key already added: ${key} (${fp})" >&2
+    return 0
+  fi
+
   ssh-add "${key}"
 }
 
@@ -119,7 +149,7 @@ ssh-agent-list() {
 # exit code 0: agent is running
 # exit code 1: agent is running but has no keys
 ssh-agent-alive() {
-  ssh-add -l >& /dev/null
+  timeout 2 ssh-add -l >& /dev/null
   [[ $? -lt 2 ]]
 }
 
